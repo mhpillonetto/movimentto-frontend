@@ -20,7 +20,7 @@ const UserTypeSelect = ({selectedUserType, setSelectedUserType}: userTypeSelectP
     return (
         <div>
             <select className="form-selec mt-3 mb-3" aria-label="Default select example" onChange={handleSelectUserType}>
-                <option selected>Selecione o tipo de usuário</option>
+                <option defaultValue={userType.transportadora}>Selecione o tipo de usuário</option>
                 <option value={userType.transportadora}>Transportadora</option>
                 <option value={userType.operador}>Operador</option>
                 <option value={userType.motorista}>Motorista</option>
