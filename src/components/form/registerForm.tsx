@@ -1,20 +1,24 @@
 import axios from 'axios'
 import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Constants from '../../data/constants'
+import { createNewUser } from '../../requests/createNewUser'
+import UserTypeSelect from '../select/userTypeSelect'
+import User from '../../model/User'
 
-interface IFormState {
-  username: string
-  email: string
-  password: string
-}
+const userType = Constants.userType
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
 
-  const [formState, setFormState] = useState<IFormState>({
+  const [formState, setFormState] = useState<User>({
     username: "",
     email: "",
-    password: ""
+    password: "",
+    userType: userType.transportadora 
   })
+
+  const [selectedUserType, setSelectedUserType] = useState(userType.transportadora)
 
   const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const targetInput = event.currentTarget
@@ -28,9 +32,8 @@ const RegisterForm = () => {
   }, [formState])
 
 
-  const navigate = useNavigate();
 
-  const handleSubmit = useCallback((event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async(event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const { username, email, password } = formState;
@@ -39,18 +42,13 @@ const RegisterForm = () => {
       window.alert("Fill all the required fields")
       return
     }
-
-    axios.post<JSON>("http://localhost:3500/register", {
-      user: username,
-      pwd: password
-    })
-      .then(function (response) {
-        navigate('/inicio', { replace: true });
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+    try{
+      await createNewUser(formState)
+      navigate('/inicio', { replace: true })
+    } catch(error) {
+      console.log(error);
+      
+    }
 
   }, [formState]);
 
@@ -100,6 +98,9 @@ const RegisterForm = () => {
           onChange={handleInputChange}
         />
       </div>
+
+      <UserTypeSelect selectedUserType={selectedUserType} setSelectedUserType={setSelectedUserType} />
+
       <button type="submit" className="btn btn-primary">
         Enviar
       </button>
