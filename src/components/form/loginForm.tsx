@@ -57,7 +57,7 @@ const LoginForm = () => {
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="exampleInputUsername" className="form-label">
-          Username
+          Nome de usuário
         </label>
         <input
           type="text"
@@ -72,7 +72,7 @@ const LoginForm = () => {
 
       <div className="mb-3">
         <label htmlFor="exampleInputPassword1" className="form-label">
-          Password
+          Senha
         </label>
         <input
           type="password"
@@ -85,7 +85,7 @@ const LoginForm = () => {
         />
       </div>
       <button type="submit" className="btn btn-primary">
-        Submit
+        Enviar
       </button>
     </form>
   )

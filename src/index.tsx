@@ -6,17 +6,13 @@ import {
 } from "react-router-dom";
 import './index.css';
 import Home from './pages/Home';
+import Landing from './pages/Landing';
 import Login from './pages/Login';
-import Pokemons from './pages/Pokemons/pokemons';
 import Register from './pages/Register';
 
 const router = createBrowserRouter([
   {
-    path: "/pokemons",
-    element: <Pokemons/>
-  },
-  {
-    path: "/register",
+    path: "/cadastro",
     element: <Register/>
   },
   {
@@ -25,8 +21,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/*",
-    element: <Home />
+    element: <Landing />
   },
+  {
+    path: "/inicio",
+    element: <Home />
+  }
 ])
 
 const root = ReactDOM.createRoot(

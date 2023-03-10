@@ -6,17 +6,17 @@ import LoginForm from '../../components/form/loginForm'
 const Login = () => {
   return (
     <div className='container mt-5'>
-      <h2>Log in</h2>
+      <h2>Entre na plataforma</h2>
 
       <LoginForm />
 
       <div className='mt-5'>
         <ul>
           <li>
-            <Link to="/register" replace={true}>Register</Link>
+            <Link to="/cadastro" replace={true}>Novo Usuário</Link>
           </li>
           <li>
-            <Link to="/" replace={true}>Home</Link>
+            <Link to="/" replace={true}>Início</Link>
           </li>
         </ul>
       </div>

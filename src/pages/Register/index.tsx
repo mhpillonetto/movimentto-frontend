@@ -6,7 +6,7 @@ import RegisterForm from '../../components/form/registerForm'
 const Register = () => {
   return (
     <div className='container mt-5'>
-      <h2>Register here</h2>
+      <h2>Faça seu cadastro</h2>
 
       <RegisterForm />
 

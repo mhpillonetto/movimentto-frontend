@@ -58,7 +58,7 @@ const RegisterForm = () => {
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="exampleInputUsername" className="form-label">
-          Username
+          Nome de usuário
         </label>
         <input
           type="text"
@@ -73,7 +73,7 @@ const RegisterForm = () => {
 
       <div className="mb-3">
         <label htmlFor="exampleInputEmail1" className="form-label">
-          Email address
+          E-mail
         </label>
         <input
           type="email"
@@ -88,7 +88,7 @@ const RegisterForm = () => {
 
       <div className="mb-3">
         <label htmlFor="exampleInputPassword1" className="form-label">
-          Password
+          Senha
         </label>
         <input
           type="password"
@@ -101,7 +101,7 @@ const RegisterForm = () => {
         />
       </div>
       <button type="submit" className="btn btn-primary">
-        Submit
+        Enviar
       </button>
     </form>
   )

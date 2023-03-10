@@ -1,23 +1,31 @@
+import axios from 'axios'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import Heading from '../../components/Heading'
-import Button from '../../components/ui/button'
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    axios.get<JSON>("http://localhost:3500/logout", {
+    })
+      .then(function (response) {
+        navigate('/', { replace: true })
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+
   return (
-    <>
-      <Heading title={"Hello Trainer!"} />
+    <div className='container mt-5'>
+      <Heading title={"Essa é sua página inicial"} />
       <div>
-        <ul>
-          <li>
-            <Link to="/login" replace={true}>Login</Link>
-          </li>
-          <li>
-            <Link to="/register" replace={true}>Register</Link>
-          </li>
-        </ul>
+        <button className="btn btn-primary mt-5" onClick={handleLogout}>
+          Sair
+        </button>
       </div>
-    </>
+    </div>
   )
 }
 
