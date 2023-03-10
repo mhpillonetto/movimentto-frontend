@@ -44,7 +44,7 @@ const LoginForm = () => {
       pwd: password
     })
       .then(function (response) {
-        navigate('/', { replace: true });
+        navigate('/inicio', { replace: true });
         console.log(response);
       })
       .catch(function (error) {
