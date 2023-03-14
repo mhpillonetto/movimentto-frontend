@@ -1,16 +1,15 @@
-import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import Heading from '../../components/Heading'
-import Constants from '../../data/constants';
 
-const serviceURI = Constants.serviceURI
+import http from '../../providers'
 
 const Home = () => {
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    axios.get<JSON>(`${serviceURI}/logout`, {
+    localStorage.setItem("jwt","")
+    http.get<JSON>(`/logout`, {
     })
       .then(function (response) {
         navigate('/', { replace: true })
@@ -23,6 +22,7 @@ const Home = () => {
   return (
     <div className='container mt-5'>
       <Heading title={"Essa é sua página inicial"} />
+      <div>Bem vindo ao perfil de {localStorage.userType}</div>
       <div>
         <button className="btn btn-primary mt-5" onClick={handleLogout}>
           Sair

@@ -1,8 +1,9 @@
 import loginUser from '../model/LoginUser'
 import http from '../providers'
+import { getUserByUsername } from './getUserByUsername'
 
 type loginResponse = {
-    accessToken: String
+    accessToken: string
 }
 
 export const login = async (loggingUser: loginUser) => {
@@ -15,6 +16,9 @@ export const login = async (loggingUser: loginUser) => {
 
     if (status !== 200) throw new Error()
     
-    // localStorage.setItem("jwt", data.token)
+    localStorage.setItem("jwt", data.accessToken)
+
+    const userType = await getUserByUsername(username)
+    localStorage.setItem("userType", userType)
 
 }

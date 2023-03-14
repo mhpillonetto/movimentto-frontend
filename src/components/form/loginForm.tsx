@@ -40,6 +40,7 @@ const LoginForm = () => {
 
     try {
       await login(formState)
+            
       navigate('/inicio', { replace: true });
     } catch (error) {
       console.log(error);
