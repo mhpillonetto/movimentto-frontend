@@ -4,7 +4,7 @@ import axios from 'axios'
 export const createNewUser = (newUser: User) => {
     const { username, password, email, userType } = newUser
 
-    axios.post<JSON>("http://localhost:3500/register", {
+    axios.post<JSON>("https://mvt-api-server.onrender.com/register", {
         user: username,
         pwd: password,
         email,
