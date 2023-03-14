@@ -1,5 +1,5 @@
 import User from '../model/User'
-import axios from 'axios'
+import http from '../providers'
 import Constants from '../data/constants'
 
 const serviceURI = Constants.serviceURI
@@ -7,7 +7,7 @@ const serviceURI = Constants.serviceURI
 export const createNewUser = (newUser: User) => {
     const { username, password, email, userType } = newUser
 
-    axios.post<JSON>(`${serviceURI}/register`, {
+    http.post<JSON>(`${serviceURI}/register`, {
         user: username,
         pwd: password,
         email,
@@ -15,6 +15,7 @@ export const createNewUser = (newUser: User) => {
     })
         .then(function (response) {
             console.log(response)
+            return response
         })
         .catch(function (error) {
             console.log(error)

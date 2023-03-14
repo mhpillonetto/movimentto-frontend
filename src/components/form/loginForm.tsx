@@ -1,6 +1,6 @@
-import axios from 'axios'
 import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { login } from '../../services/login'
 
 interface IFormState {
   username: string
@@ -28,28 +28,22 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = useCallback((event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const { username, password } = formState;
 
     if (!username || !password) {
       window.alert("Fill all the required fields")
-
       return
     }
 
-    axios.post<JSON>("http://localhost:3500/auth", {
-      user: username,
-      pwd: password
-    })
-      .then(function (response) {
-        navigate('/inicio', { replace: true });
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+    try {
+      await login(formState)
+      navigate('/inicio', { replace: true });
+    } catch (error) {
+      console.log(error);
+    }
 
   }, [formState]);
 

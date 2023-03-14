@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Constants from '../../data/constants'
-import { createNewUser } from '../../requests/createNewUser'
+import { createNewUser } from '../../services/createNewUser'
 import UserTypeSelect from '../select/userTypeSelect'
 import User from '../../model/User'
 
@@ -46,7 +46,6 @@ const RegisterForm = () => {
       navigate('/inicio', { replace: true })
     } catch(error) {
       console.log(error);
-      
     }
 
   }, [formState]);
