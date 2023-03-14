@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Constants from '../../data/constants'
