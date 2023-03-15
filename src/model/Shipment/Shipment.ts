@@ -3,5 +3,7 @@ export default interface Shipment {
     deliveryLocation: string
     retrievalLocation: string
     owner: string
-    createdAt: string
+    createdAt: Date
+    price: number
+
 }

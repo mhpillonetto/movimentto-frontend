@@ -9,21 +9,24 @@ const Shipments = () => {
       deliveryLocation: "Rio de Janeiro - RJ",
       retrievalLocation: "Curitiba - PR" ,
       owner: "operator",
-      createdAt: "15/03/2023 18:00" ,
+      createdAt: new Date(),
+      price: 4000
     },
     { 
       name: "Entrega de Tampas",
       deliveryLocation: "Rio de Janeiro - RJ",
       retrievalLocation: "Curitiba - PR" ,
       owner: "operator",
-      createdAt: "15/03/2023 18:00" ,
+      createdAt: new Date(),
+      price: 4000
     },
     { 
       name: "Entrega de Tampas",
       deliveryLocation: "Rio de Janeiro - RJ",
       retrievalLocation: "Curitiba - PR" ,
       owner: "operator",
-      createdAt: "15/03/2023 18:00" ,
+      createdAt: new Date(),
+      price: 4000
     }
   ]
 
