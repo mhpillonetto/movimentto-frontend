@@ -12,9 +12,7 @@ const userType = Constants.userType
 
 const EditProfileForm = () => {
     const navigate = useNavigate()    
-
-    console.log(localStorage);
-    
+        
     //getUser assincrono para setar o objeto com os valores ja existentes
     const [formState, setFormState] = useState<Transporter>({
         username: localStorage?.getItem("userName") || "",
@@ -43,9 +41,6 @@ const EditProfileForm = () => {
 
     const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-
-        const { username, email, cnpj, contactName, contactPhoneNumber, website, cep } = formState;
-
         try {
             await editUser(formState)
             navigate('/inicio', { replace: true })
