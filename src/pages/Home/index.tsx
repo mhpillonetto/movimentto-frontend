@@ -7,9 +7,6 @@ import http from '../../providers'
 const Home = () => {
   const navigate = useNavigate()
 
-  console.log(localStorage);
-  
-
   const handleLogout = () => {
     localStorage.setItem("jwt","")
     http.get<JSON>(`/logout`, {

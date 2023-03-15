@@ -4,26 +4,28 @@ import { createNewUser } from '../../services/createNewUser'
 import UserTypeSelect from '../select/userTypeSelect'
 import Transporter from '../../model/Transporter'
 import { useNavigate } from 'react-router-dom'
-import { editProfile } from '../../services/editProfile'
+import { editUser } from '../../services/editUser'
 import { getUserByUsername } from '../../services/getUserByUsername'
 import User from '../../model/User'
 
 const userType = Constants.userType
 
 const EditProfileForm = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate()    
 
-    const username = localStorage?.getItem("User")    
-
+    console.log(localStorage);
+    
+    //getUser assincrono para setar o objeto com os valores ja existentes
     const [formState, setFormState] = useState<Transporter>({
-        username: "",
-        email: "",
+        username: localStorage?.getItem("userName") || "",
+        email: localStorage?.getItem("email") || "",
         cnpj: "",
         contactName: "",
         contactPhoneNumber: "",
         website: "",
         cep: ""
     })
+
 
 
     const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +47,7 @@ const EditProfileForm = () => {
         const { username, email, cnpj, contactName, contactPhoneNumber, website, cep } = formState;
 
         try {
-            await editProfile(formState)
+            await editUser(formState)
             navigate('/inicio', { replace: true })
         } catch (error) {
             console.log(error)

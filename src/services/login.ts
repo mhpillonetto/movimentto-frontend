@@ -9,7 +9,6 @@ type loginResponse = {
 
 export const login = async (loggingUser: loginUser) => {
     const { username, password } = loggingUser
-    console.log(loggingUser);
 
     try {
         const { status, data } = await http.post<loginResponse>(`/auth`, {
@@ -18,7 +17,7 @@ export const login = async (loggingUser: loginUser) => {
         })
 
         localStorage.setItem("jwt", data.accessToken)
-        
+
         const foundUser: User = await getUserByUsername(username)
 
         localStorage.setItem("userName", foundUser.username)
