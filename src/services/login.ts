@@ -1,6 +1,6 @@
 import loginUser from '../model/LoginUser'
 import User from '../model/User'
-import http from '../providers'
+import { http_auth } from '../providers'
 import { getUserByUsername } from './getUserByUsername'
 
 type loginResponse = {
@@ -11,7 +11,7 @@ export const login = async (loggingUser: loginUser) => {
     const { username, password } = loggingUser
 
     try {
-        const { status, data } = await http.post<loginResponse>(`/auth`, {
+        const { status, data } = await http_auth.post<loginResponse>(`/auth`, {
             user: username,
             pwd: password
         })

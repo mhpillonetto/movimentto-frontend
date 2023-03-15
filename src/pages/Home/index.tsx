@@ -2,21 +2,16 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import Heading from '../../components/Heading'
 
-import http from '../../providers'
+import { http } from '../../providers'
+import { logout } from '../../services/logout';
 
 const Home = () => {
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    localStorage.setItem("jwt","")
-    http.get<JSON>(`/logout`, {
-    })
-      .then(function (response) {
-        navigate('/', { replace: true })
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+    logout()
+    localStorage.clear()
+    navigate('/')
   }
 
   return (

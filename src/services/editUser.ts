@@ -1,6 +1,6 @@
 import Transporter from "../model/Transporter";
 import Driver from "../model/Driver";
-import http from '../providers'
+import { http } from '../providers'
 
 export const editUser = async (user: Transporter | Driver) => {
     try {

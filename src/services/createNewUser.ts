@@ -1,11 +1,11 @@
 import User from '../model/User'
-import http from '../providers'
+import { http_auth } from '../providers'
 
 
 export const createNewUser = async (newUser: User) => {
     const { username, password, email, userType } = newUser
     try {
-       await http.post<JSON>(`register`, {
+        await http_auth.post<JSON>(`register`, {
             user: username,
             pwd: password,
             email,
@@ -15,7 +15,7 @@ export const createNewUser = async (newUser: User) => {
         localStorage.setItem("userType", userType)
         localStorage.setItem("userName", username)
 
-    } catch (error) {           
+    } catch (error) {
         throw new Error
     }
 }
