@@ -62,6 +62,7 @@ const TransporterProfileForm = () => {
                     id="username"
                     name="username"
                     required
+                    disabled
                     value={formState.username}
                     onChange={handleInputChange}
                 />

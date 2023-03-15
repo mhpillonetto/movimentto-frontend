@@ -1,30 +1,40 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import Constants from '../../data/constants'
-import Transporter from '../../model/Transporter'
 import { useNavigate } from 'react-router-dom'
 import { editUser } from '../../services/editUser'
-import { getTransporterByUsername } from '../../services/getTransporterByUsername'
+import { getDriverByUsername } from '../../services/getDriverByUsername'
+import Driver from '../../model/Driver'
+import { editDriver } from '../../services/editDriver'
+import Constants from '../../data/constants'
+import MvtSelect from '../select/select'
 
-const userType = Constants.userType
+const vehicleType = Constants.vehicleType
 
 const DriverProfileForm = () => {
     const navigate = useNavigate()
 
     //getUser assincrono para setar o objeto com os valores ja existentes
-    const [formState, setFormState] = useState<Transporter>({
+    const [formState, setFormState] = useState<Driver>({
         username: localStorage?.getItem("userName") || "",
         email: "",
-        cnpj: "",
-        contactName: "",
-        contactPhoneNumber: "",
-        website: "",
-        cep: ""
+        cpf: "",
+        phoneNumber: "",
+        licensePlate: "",
+        vehicleType: ""
     })
 
+    const [selectedVehicleType, setSelectedVehicleType] = useState(vehicleType.truck)
+
     useEffect(() => {
-        getTransporterByUsername(formState?.username)
-            .then(currentUser => setFormState(currentUser))
+        getDriverByUsername(formState?.username)
+            .then(currentUser => {
+                setFormState(currentUser)
+                setSelectedVehicleType(currentUser.vehicleType)
+            })
     }, [])
+
+    useEffect(() => {
+        setFormState({ ...formState, vehicleType: selectedVehicleType })
+    }, [selectedVehicleType])
 
     const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const targetInput = event.currentTarget
@@ -39,8 +49,10 @@ const DriverProfileForm = () => {
 
     const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        const vehicleType = selectedVehicleType
+        const editedDriver = { ...formState, vehicleType }
         try {
-            await editUser(formState)
+            await editDriver(editedDriver)
             navigate('/inicio', { replace: true })
         } catch (error) {
             console.log(error)
@@ -60,6 +72,7 @@ const DriverProfileForm = () => {
                     id="username"
                     name="username"
                     required
+                    disabled
                     value={formState.username}
                     onChange={handleInputChange}
                 />
@@ -81,68 +94,50 @@ const DriverProfileForm = () => {
             </div>
 
             <div className="mb-3">
-                <label htmlFor="cnpjInput" className="form-label">
-                    CNPJ
+                <label htmlFor="cpfInput" className="form-label">
+                    CPF
                 </label>
                 <input
                     type="text"
                     className="form-control"
-                    id="cnpj"
-                    name="cnpj"
-                    value={formState.cnpj}
+                    id="cpf"
+                    name="cpf"
+                    value={formState.cpf}
                     onChange={handleInputChange}
                 />
             </div>
 
             <div className="mb-3">
-                <label htmlFor="contactNameInput" className="form-label">
-                    Nome do responsável
+                <label htmlFor="phoneNumberInput" className="form-label">
+                    Telefone Celular
                 </label>
                 <input
                     type="text"
                     className="form-control"
-                    id="contactName"
-                    name="contactName"
-                    value={formState.contactName}
-                    onChange={handleInputChange}
-                />
-                <label htmlFor="contactPhoneNumberInput" className="form-label">
-                    Telefone do responsável
-                </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="contactPhoneNumber"
-                    name="contactPhoneNumber"
-                    value={formState.contactPhoneNumber}
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    value={formState.phoneNumber}
                     onChange={handleInputChange}
                 />
             </div>
 
-            <div className="mb-3">
-                <label htmlFor="websiteInput" className="form-label">
-                    Website
+            <div>
+                <label htmlFor="phoneNumberInput" className="form-label">
+                    Tipo de veículo
                 </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="website"
-                    name="website"
-                    value={formState.website}
-                    onChange={handleInputChange}
-                />
+                <MvtSelect selected={selectedVehicleType} setSelected={setSelectedVehicleType} options={[vehicleType.bitruck, vehicleType.carreta, vehicleType.truck]} />
             </div>
 
             <div className="mb-3">
-                <label htmlFor="cepInput" className="form-label">
-                    CEP
+                <label htmlFor="licensePlateInput" className="form-label">
+                    Placa
                 </label>
                 <input
                     type="text"
                     className="form-control"
-                    id="cep"
-                    name="cep"
-                    value={formState.cep}
+                    id="licensePlate"
+                    name="licensePlate"
+                    value={formState.licensePlate}
                     onChange={handleInputChange}
                 />
             </div>

@@ -2,8 +2,8 @@ import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Constants from '../../data/constants'
 import { createNewUser } from '../../services/createNewUser'
-import UserTypeSelect from '../select/userTypeSelect'
 import User from '../../model/User'
+import MvtSelect from '../select/select'
 
 const userType = Constants.userType
 
@@ -108,7 +108,12 @@ const RegisterForm = () => {
         />
       </div>
 
-      <UserTypeSelect selectedUserType={selectedUserType} setSelectedUserType={setSelectedUserType} />
+      <div>
+        <label htmlFor="phoneNumberInput" className="form-label">
+          Tipo de Usuário
+        </label>
+        <MvtSelect selected={selectedUserType} options={[userType.motorista, userType.operador, userType.transportadora]} setSelected={setSelectedUserType} />
+      </div>
 
       <button type="submit" className="btn btn-primary">
         Enviar

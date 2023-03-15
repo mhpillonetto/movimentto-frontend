@@ -12,6 +12,8 @@ const Profile = () => {
             return <TransporterProfileForm />
           case 'Motorista':
             return <DriverProfileForm />
+          case 'Operador':
+            return <DriverProfileForm />
           default:
             return null
         }
