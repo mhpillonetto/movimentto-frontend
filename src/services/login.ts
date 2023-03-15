@@ -1,4 +1,5 @@
 import loginUser from '../model/LoginUser'
+import User from '../model/User'
 import http from '../providers'
 import { getUserByUsername } from './getUserByUsername'
 
@@ -8,17 +9,24 @@ type loginResponse = {
 
 export const login = async (loggingUser: loginUser) => {
     const { username, password } = loggingUser
+    console.log(loggingUser);
 
-    const {status, data} = await http.post<loginResponse>(`/auth`, {
-        user: username,
-        pwd: password
-    })
+    try {
+        const { status, data } = await http.post<loginResponse>(`/auth`, {
+            user: username,
+            pwd: password
+        })
 
-    if (status !== 200) throw new Error()
-    
-    localStorage.setItem("jwt", data.accessToken)
+        localStorage.setItem("jwt", data.accessToken)
+        
+        const foundUser: User = await getUserByUsername(username)
 
-    const userType = await getUserByUsername(username)
-    localStorage.setItem("userType", userType)
+        localStorage.setItem("userName", foundUser.username)
+        localStorage.setItem("userType", foundUser.userType)
+        localStorage.setItem("email", foundUser.email)
+
+    } catch (error) {
+        throw new Error
+    }
 
 }

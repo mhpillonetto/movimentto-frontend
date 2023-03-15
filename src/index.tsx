@@ -8,6 +8,7 @@ import './index.css';
 import Home from './pages/Home';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 import Register from './pages/Register';
 
 const router = createBrowserRouter([
@@ -26,7 +27,12 @@ const router = createBrowserRouter([
   {
     path: "/inicio",
     element: <Home />
+  },
+  {
+    path: "/perfil",
+    element: <Profile />
   }
+
 ])
 
 const root = ReactDOM.createRoot(

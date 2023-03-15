@@ -1,7 +1,7 @@
 import User from '../model/User'
 import http from '../providers'
 
-export const getUserByUsername = async (username: string): Promise<string>=> {
+export const getUserByUsername = async (username: string): Promise<User>=> {
 
     const {status, data} = await http.get<User>(`/user`, {headers: {username}})
     
@@ -10,5 +10,5 @@ export const getUserByUsername = async (username: string): Promise<string>=> {
         throw new Error()
     }
 
-    return data.userType
+    return data
 }
