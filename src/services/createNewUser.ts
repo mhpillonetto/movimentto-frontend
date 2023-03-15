@@ -2,21 +2,20 @@ import User from '../model/User'
 import http from '../providers'
 
 
-export const createNewUser = (newUser: User) => {
+export const createNewUser = async (newUser: User) => {
     const { username, password, email, userType } = newUser
+    try {
+       await http.post<JSON>(`register`, {
+            user: username,
+            pwd: password,
+            email,
+            userType
+        })
 
-    http.post<JSON>(`register`, {
-        user: username,
-        pwd: password,
-        email,
-        userType
-    })
-        .then(function (response) {
-            localStorage.store("userType", userType)
-            return response
-        })
-        .catch(function (error) {
-            console.log(error)
-            throw new Error(error)
-        })
+        localStorage.setItem("userType", userType)
+        localStorage.setItem("userName", username)
+
+    } catch (error) {           
+        throw new Error
+    }
 }

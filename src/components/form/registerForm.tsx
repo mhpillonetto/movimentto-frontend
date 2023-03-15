@@ -51,14 +51,13 @@ const RegisterForm = () => {
     }
 
     try {
-      console.log('====================================');
-      console.log(newUser);
-      console.log('====================================');
       await createNewUser(newUser)
+      navigate('/inicio', { replace: true })
+
     } catch (error) {
-      throw new Error
+      console.log(error);
+      window.alert("Erro no cadastro")
     }
-    navigate('/inicio', { replace: true })
 
   }, [formState]);
 
