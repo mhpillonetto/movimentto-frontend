@@ -3,7 +3,7 @@ import EditProfileForm from '../../components/form/editProfileForm'
 
 const Profile = () => {
   return (
-    <div className='container'>
+    <div className='container mt-5'>
       <h1>Meu Perfil</h1>
       <EditProfileForm />
     </div>

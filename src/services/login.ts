@@ -22,7 +22,6 @@ export const login = async (loggingUser: loginUser) => {
 
         localStorage.setItem("userName", foundUser.username)
         localStorage.setItem("userType", foundUser.userType)
-        localStorage.setItem("email", foundUser.email)
 
     } catch (error) {
         throw new Error

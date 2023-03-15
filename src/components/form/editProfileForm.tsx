@@ -1,22 +1,21 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Constants from '../../data/constants'
-import { createNewUser } from '../../services/createNewUser'
-import UserTypeSelect from '../select/userTypeSelect'
 import Transporter from '../../model/Transporter'
 import { useNavigate } from 'react-router-dom'
 import { editUser } from '../../services/editUser'
 import { getUserByUsername } from '../../services/getUserByUsername'
 import User from '../../model/User'
+import { getTransporterByUsername } from '../../services/getTransporterByUsername'
 
 const userType = Constants.userType
 
 const EditProfileForm = () => {
-    const navigate = useNavigate()    
-        
+    const navigate = useNavigate()
+
     //getUser assincrono para setar o objeto com os valores ja existentes
     const [formState, setFormState] = useState<Transporter>({
         username: localStorage?.getItem("userName") || "",
-        email: localStorage?.getItem("email") || "",
+        email: "",
         cnpj: "",
         contactName: "",
         contactPhoneNumber: "",
@@ -24,7 +23,10 @@ const EditProfileForm = () => {
         cep: ""
     })
 
-
+    useEffect(() => {
+        getTransporterByUsername(formState?.username)
+            .then(currentUser => setFormState(currentUser))
+    }, [])
 
     const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const targetInput = event.currentTarget
@@ -36,8 +38,6 @@ const EditProfileForm = () => {
             [name]: value,
         })
     }, [formState])
-
-
 
     const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
