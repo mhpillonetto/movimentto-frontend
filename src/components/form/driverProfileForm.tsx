@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { editUser } from '../../services/editUser'
-import Driver from '../../model/Driver'
+import Driver from '../../model/User/Driver'
 import Constants from '../../data/constants'
 import MvtSelect from '../select/select'
 import { getUserByUsername } from '../../services/getUserByUsername'

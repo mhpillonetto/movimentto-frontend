@@ -1,5 +1,5 @@
-import loginUser from '../model/LoginUser'
-import User from '../model/User'
+import loginUser from '../model/User/LoginUser'
+import User from '../model/User/User'
 import { http_auth } from '../providers'
 import { getUserByUsername } from './getUserByUsername'
 

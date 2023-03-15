@@ -4,12 +4,15 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Shipment from './components/Shipment';
 import './index.css';
 import Home from './pages/Home';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
+import Shipments from './pages/Shipment';
+import ShipmentDetail from './pages/Shipment/detail';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +34,15 @@ const router = createBrowserRouter([
   {
     path: "/perfil",
     element: <Profile />
-  }
+  },
+  {
+    path: "/cargas",
+    element: <Shipments />
+  },
+  {
+    path: "/cargas/detalhes",
+    element: <ShipmentDetail />
+  },
 
 ])
 

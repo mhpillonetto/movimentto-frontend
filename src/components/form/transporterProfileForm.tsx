@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Constants from '../../data/constants'
-import Transporter from '../../model/Transporter'
+import Transporter from '../../model/User/Transporter'
 import { useNavigate } from 'react-router-dom'
 import { editUser } from '../../services/editUser'
 import { getUserByUsername } from '../../services/getUserByUsername'
