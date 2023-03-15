@@ -3,13 +3,11 @@ import Constants from '../../data/constants'
 import Transporter from '../../model/Transporter'
 import { useNavigate } from 'react-router-dom'
 import { editUser } from '../../services/editUser'
-import { getUserByUsername } from '../../services/getUserByUsername'
-import User from '../../model/User'
 import { getTransporterByUsername } from '../../services/getTransporterByUsername'
 
 const userType = Constants.userType
 
-const EditProfileForm = () => {
+const DriverProfileForm = () => {
     const navigate = useNavigate()
 
     //getUser assincrono para setar o objeto com os valores ja existentes
@@ -156,4 +154,4 @@ const EditProfileForm = () => {
     )
 }
 
-export default EditProfileForm
+export default DriverProfileForm

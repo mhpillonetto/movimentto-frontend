@@ -14,7 +14,7 @@ const RegisterForm = () => {
     username: "",
     email: "",
     password: "",
-    userType: userType.transportadora 
+    userType: userType.transportadora
   })
 
   const [selectedUserType, setSelectedUserType] = useState(userType.transportadora)
@@ -32,21 +32,33 @@ const RegisterForm = () => {
 
 
 
-  const handleSubmit = useCallback(async(event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const { username, email, password } = formState;
+    const userType = selectedUserType;
 
-    if (!email || !username || !password) {
-      window.alert("Fill all the required fields")
+    if (!email || !username || !password || !userType) {
+      window.alert("Preencha todos os campos")
       return
     }
-    try{
-      await createNewUser(formState)
-      navigate('/inicio', { replace: true })
-    } catch(error) {
-      console.log(error);
+
+    const newUser = {
+      username,
+      email,
+      password,
+      userType
     }
+
+    try {
+      console.log('====================================');
+      console.log(newUser);
+      console.log('====================================');
+      await createNewUser(newUser)
+    } catch (error) {
+      throw new Error
+    }
+    navigate('/inicio', { replace: true })
 
   }, [formState]);
 
