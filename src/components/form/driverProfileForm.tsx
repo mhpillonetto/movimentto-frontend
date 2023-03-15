@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { editUser } from '../../services/editUser'
-import { getDriverByUsername } from '../../services/getDriverByUsername'
 import Driver from '../../model/Driver'
-import { editDriver } from '../../services/editDriver'
 import Constants from '../../data/constants'
 import MvtSelect from '../select/select'
+import { getUserByUsername } from '../../services/getUserByUsername'
 
 const vehicleType = Constants.vehicleType
 
@@ -25,7 +24,7 @@ const DriverProfileForm = () => {
     const [selectedVehicleType, setSelectedVehicleType] = useState(vehicleType.truck)
 
     useEffect(() => {
-        getDriverByUsername(formState?.username)
+        getUserByUsername(formState?.username)
             .then(currentUser => {
                 setFormState(currentUser)
                 setSelectedVehicleType(currentUser.vehicleType)
@@ -52,7 +51,7 @@ const DriverProfileForm = () => {
         const vehicleType = selectedVehicleType
         const editedDriver = { ...formState, vehicleType }
         try {
-            await editDriver(editedDriver)
+            await editUser(editedDriver)
             navigate('/inicio', { replace: true })
         } catch (error) {
             console.log(error)

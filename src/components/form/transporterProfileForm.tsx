@@ -4,8 +4,6 @@ import Transporter from '../../model/Transporter'
 import { useNavigate } from 'react-router-dom'
 import { editUser } from '../../services/editUser'
 import { getUserByUsername } from '../../services/getUserByUsername'
-import User from '../../model/User'
-import { getTransporterByUsername } from '../../services/getTransporterByUsername'
 
 const userType = Constants.userType
 
@@ -24,7 +22,7 @@ const TransporterProfileForm = () => {
     })
 
     useEffect(() => {
-        getTransporterByUsername(formState?.username)
+        getUserByUsername(formState?.username)
             .then(currentUser => setFormState(currentUser))
     }, [])
 
