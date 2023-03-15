@@ -1,11 +1,24 @@
 import React from 'react'
-import EditProfileForm from '../../components/form/editProfileForm'
+import DriverProfileForm from '../../components/form/driverProfileForm';
+import TransporterProfileForm from '../../components/form/transporterProfileForm'
 
 const Profile = () => {
   return (
     <div className='container mt-5'>
       <h1>Meu Perfil</h1>
-      <EditProfileForm />
+      {(() => {
+        switch (localStorage.getItem("userType")) {
+          case 'Transportadora':
+            return <TransporterProfileForm />
+          case 'Motorista':
+            return <DriverProfileForm />
+          case 'Operador':
+            return <DriverProfileForm />
+          default:
+            return null
+        }
+      })()}
+        
     </div>
   )
 }

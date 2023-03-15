@@ -40,10 +40,11 @@ const LoginForm = () => {
 
     try {
       await login(formState)
-            
-      navigate('/inicio', { replace: true });
+      navigate('/inicio', { replace: true })
+
     } catch (error) {
       console.log(error);
+      window.alert("Usuário ou senha incorretos")
     }
 
   }, [formState]);

@@ -9,7 +9,7 @@ import { getTransporterByUsername } from '../../services/getTransporterByUsernam
 
 const userType = Constants.userType
 
-const EditProfileForm = () => {
+const TransporterProfileForm = () => {
     const navigate = useNavigate()
 
     //getUser assincrono para setar o objeto com os valores ja existentes
@@ -62,6 +62,7 @@ const EditProfileForm = () => {
                     id="username"
                     name="username"
                     required
+                    disabled
                     value={formState.username}
                     onChange={handleInputChange}
                 />
@@ -156,4 +157,4 @@ const EditProfileForm = () => {
     )
 }
 
-export default EditProfileForm
+export default TransporterProfileForm

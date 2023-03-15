@@ -2,8 +2,8 @@ import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Constants from '../../data/constants'
 import { createNewUser } from '../../services/createNewUser'
-import UserTypeSelect from '../select/userTypeSelect'
 import User from '../../model/User'
+import MvtSelect from '../select/select'
 
 const userType = Constants.userType
 
@@ -14,7 +14,7 @@ const RegisterForm = () => {
     username: "",
     email: "",
     password: "",
-    userType: userType.transportadora 
+    userType: userType.transportadora
   })
 
   const [selectedUserType, setSelectedUserType] = useState(userType.transportadora)
@@ -32,20 +32,31 @@ const RegisterForm = () => {
 
 
 
-  const handleSubmit = useCallback(async(event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const { username, email, password } = formState;
+    const userType = selectedUserType;
 
-    if (!email || !username || !password) {
-      window.alert("Fill all the required fields")
+    if (!email || !username || !password || !userType) {
+      window.alert("Preencha todos os campos")
       return
     }
-    try{
-      await createNewUser(formState)
+
+    const newUser = {
+      username,
+      email,
+      password,
+      userType
+    }
+
+    try {
+      await createNewUser(newUser)
       navigate('/inicio', { replace: true })
-    } catch(error) {
+
+    } catch (error) {
       console.log(error);
+      window.alert("Erro no cadastro")
     }
 
   }, [formState]);
@@ -97,7 +108,12 @@ const RegisterForm = () => {
         />
       </div>
 
-      <UserTypeSelect selectedUserType={selectedUserType} setSelectedUserType={setSelectedUserType} />
+      <div>
+        <label htmlFor="phoneNumberInput" className="form-label">
+          Tipo de Usuário
+        </label>
+        <MvtSelect selected={selectedUserType} options={[userType.motorista, userType.operador, userType.transportadora]} setSelected={setSelectedUserType} />
+      </div>
 
       <button type="submit" className="btn btn-primary">
         Enviar
