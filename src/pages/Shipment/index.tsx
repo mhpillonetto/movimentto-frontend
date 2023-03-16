@@ -1,8 +1,15 @@
 import React, { useEffect } from 'react'
+
 import ShipmentItem from '../../components/Shipment'
 import Shipment from '../../model/Shipment/Shipment'
+import { getAllShipments } from '../../services/getAllShipments' 
 
 const Shipments = () => {
+
+  useEffect(()=>{
+    getAllShipments()
+  },[])
+
   const shipmentsList: Shipment[] = [
     { 
       name: "Entrega de Tampas",
