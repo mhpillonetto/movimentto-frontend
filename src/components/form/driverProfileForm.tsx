@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { editUser } from '../../services/editUser'
+import { editUser } from '../../services/User/editUser'
 import Driver from '../../model/Driver'
 import Constants from '../../data/constants'
 import MvtSelect from '../select/select'
-import { getUserByUsername } from '../../services/getUserByUsername'
+import { getUserByUsername } from '../../services/User/getUserByUsername'
 
 const vehicleType = Constants.vehicleType
 

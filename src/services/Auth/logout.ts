@@ -1,4 +1,4 @@
-import { http_auth } from "../providers"
+import { http_auth } from "../../providers"
 
 export const logout = () => {
     localStorage.setItem("jwt", "")

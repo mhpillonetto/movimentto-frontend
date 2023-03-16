@@ -1,7 +1,7 @@
-import Driver from '../model/Driver'
-import Transporter from '../model/Transporter'
-import User from '../model/User'
-import { http } from '../providers'
+import Driver from '../../model/Driver'
+import Transporter from '../../model/Transporter'
+import User from '../../model/User'
+import { http } from '../../providers'
 
 export const getUserByUsername = async (username: string) => {
 
