@@ -22,9 +22,6 @@ export const login = async (loggingUser: loginUser) => {
 
         const foundUser: User = await getUserByUsername(username)
 
-        console.log('====================================');
-        console.log(foundUser);
-        console.log('====================================');
         localStorage.setItem("userName", foundUser.username)
         localStorage.setItem("userType", foundUser.userType)
 
