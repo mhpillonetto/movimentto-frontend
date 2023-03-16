@@ -1,4 +1,4 @@
-import { http } from '../providers'
+import { http } from '../../providers'
 
 export const getUserByUsername = async (username: string) => {
 

@@ -1,10 +1,11 @@
-import loginUser from '../model/User/LoginUser'
-import User from '../model/User/User'
-import { http_auth } from '../providers'
-import { getUserByUsername } from './getUserByUsername'
+import loginUser from '../../model/User/LoginUser'
+import User from '../../model/User/User'
+import { http_auth } from '../../providers'
+import { getUserByUsername } from '../User/getUserByUsername'
 
 type loginResponse = {
     accessToken: string
+    refreshToken: string
 }
 
 export const login = async (loggingUser: loginUser) => {
@@ -16,10 +17,14 @@ export const login = async (loggingUser: loginUser) => {
             pwd: password
         })
 
-        localStorage.setItem("jwt", data.accessToken)
+        localStorage.setItem("accessToken", data.accessToken)
+        localStorage.setItem("refreshToken", data.refreshToken)
 
         const foundUser: User = await getUserByUsername(username)
 
+        console.log('====================================');
+        console.log(foundUser);
+        console.log('====================================');
         localStorage.setItem("userName", foundUser.username)
         localStorage.setItem("userType", foundUser.userType)
 

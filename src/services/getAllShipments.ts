@@ -8,8 +8,5 @@ export const getAllShipments = async () => {
         console.log("status error")
         throw new Error()
     }
-    console.log('====================================');
-    console.log(data);
-    console.log('====================================');
     return data
 }

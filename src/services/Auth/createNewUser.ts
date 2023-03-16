@@ -1,5 +1,5 @@
-import User from '../model/User/User'
-import { http_auth } from '../providers'
+import User from '../../model/User/User'
+import { http_auth } from '../../providers'
 
 
 export const createNewUser = async (newUser: User) => {

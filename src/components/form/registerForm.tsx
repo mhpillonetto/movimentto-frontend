@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Constants from '../../data/constants'
-import { createNewUser } from '../../services/createNewUser'
+import { createNewUser } from '../../services/Auth/createNewUser'
 import User from '../../model/User/User'
 import MvtSelect from '../select/select'
 
