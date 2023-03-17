@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Shipments from './pages/Shipment';
+import CreateShipment from './pages/Shipment/createShipment';
 import ShipmentDetail from './pages/Shipment/detail';
 
 const router = createBrowserRouter([
@@ -43,6 +44,11 @@ const router = createBrowserRouter([
     path: "/cargas/detalhes",
     element: <ShipmentDetail />
   },
+  {
+    path: "/cargas/anuciar",
+    element: <CreateShipment />
+  },
+  
 
 ])
 

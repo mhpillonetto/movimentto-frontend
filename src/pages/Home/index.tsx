@@ -18,6 +18,7 @@ const Home = () => {
       <div className='mb-5'>Bem vindo ao perfil de {localStorage.userType}</div>
       <p><Link to='/perfil'>Editar Perfil</Link></p>
       <p><Link to='/cargas'>Cargas Disponíveis</Link></p>
+      <p><Link to='/cargas/anuciar'>Anunciar uma Carga</Link></p>
       <div>
         <button className="btn btn-primary mt-5" onClick={handleLogout}>
           Sair
