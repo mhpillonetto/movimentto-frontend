@@ -1,5 +1,7 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Constants from '../data/constants'
+import { logout } from "../services/Auth/logout";
 
 const serviceURI = Constants.serviceURI
 
@@ -37,18 +39,22 @@ http.interceptors.response.use(
     return res;
   },
   async (err) => {
+    const navigate = useNavigate()
+
     const originalConfig = err.config;
 
     if (err.response) {
       if (err.response.status === 403 && !originalConfig._retry) {
-        originalConfig._retry = false;
+        originalConfig._retry = true;
 
         try {
-          const rs = await http.get("/auth/refreshtoken", {
+          const rs = await http_auth.get("/refresh", {
             headers: { refreshToken: localStorage.getItem("refreshToken")},
           });
 
-          const { accessToken } = rs.data.accessToken;
+          const accessToken = rs.data.accessToken;
+          originalConfig.headers["Authorization"] = `Bearer ${accessToken}`;
+
           localStorage.setItem("accessToken", accessToken);
 
           return http(originalConfig);
@@ -57,7 +63,8 @@ http.interceptors.response.use(
         }
       }
     }
-
+    logout();
+    navigate('/');
     return Promise.reject(err);
   }
 );

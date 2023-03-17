@@ -1,7 +1,8 @@
 import { http_auth } from "../../providers"
 
 export const logout = () => {
-    localStorage.setItem("jwt", "")
+    localStorage.setItem("accessToken", "")
+    localStorage.setItem("refreshToken", "")
 
     try {
         http_auth.get<JSON>(`/logout`)
