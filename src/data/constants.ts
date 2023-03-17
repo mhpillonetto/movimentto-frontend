@@ -1,6 +1,6 @@
 const Constants = {
-    // serviceURI: "https://mvt-api-server.onrender.com",
-    serviceURI: "http://localhost:3500",
+    serviceURI: "https://mvt-api-server.onrender.com",
+    // serviceURI: "http://localhost:3500",
     userType: {
         transportadora: "Transportadora",
         motorista: "Motorista",
