@@ -49,9 +49,6 @@ http.interceptors.response.use(
           });
 
           const { accessToken } = rs.data.accessToken;
-          console.log('====================================');
-          console.log(accessToken);
-          console.log('====================================');
           localStorage.setItem("accessToken", accessToken);
 
           return http(originalConfig);

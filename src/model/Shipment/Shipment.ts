@@ -5,5 +5,5 @@ export default interface Shipment {
     owner: string
     createdAt: Date
     price: number
-
+    requiredVehicle: string
 }

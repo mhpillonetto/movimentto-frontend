@@ -11,7 +11,7 @@ const ShipmentItem = (shipment: Shipment) => {
       <p>Retirada: {shipment.retrievalLocation}</p>
       <p>Postado por: {shipment.owner}</p>
       <p>Postado em: 11:00</p>
-      <Link to='/cargas/detalhes'>Mais Informações</Link>
+      <Link to='/cargas/detalhes' state={shipment}>Mais Informações</Link>
     </div>
   )
 }
