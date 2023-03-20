@@ -5,18 +5,10 @@ import Shipment from '../../model/Shipment/Shipment'
 import { getAllShipments } from '../../services/Shipment/getAllShipments'
 
 const Shipments = () => {
-  const [shipmentsList, setShipmentsList] = useState([{
-    title: "",
-    deliveryLocation: "",
-    deliveryDate: new Date(),
-    retrievalLocation: "",
-    retrievalDate: new Date(),
-    owner: "",
-    createdAt: new Date(),
-    price: 0,
-    requiredVehicle: "",
-    observations: ""
-  }])
+
+  const emptyShipment = {} as Shipment
+
+  const [shipmentsList, setShipmentsList] = useState([emptyShipment])
 
   useEffect(() => {
     getAllShipments()

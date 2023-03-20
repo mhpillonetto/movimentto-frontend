@@ -9,4 +9,10 @@ export default interface Shipment {
     createdAt: Date
     price: number
     requiredVehicle: string
+    contactName: string
+    contactPhoneNumber: string
+    product: string
+    productType: string
+    shipmentType: string
+    weight: number
 }
