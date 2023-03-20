@@ -15,6 +15,8 @@ const Shipments = () => {
       .then(list => {
         setShipmentsList(list)
       })
+      .catch(error => console.log(error)
+      )
   }, [])
 
   return (

@@ -24,6 +24,7 @@ const TransporterProfileForm = () => {
     useEffect(() => {
         getUserByUsername(formState?.username)
             .then(currentUser => setFormState(currentUser))
+            .catch(error=>console.log(error))
     }, [])
 
     const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {

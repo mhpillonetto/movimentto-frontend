@@ -39,17 +39,15 @@ http.interceptors.response.use(
     return res;
   },
   async (err) => {
-    const navigate = useNavigate()
 
     const originalConfig = err.config;
 
     if (err.response) {
       if (err.response.status === 403 && !originalConfig._retry) {
-        originalConfig._retry = true;
-
+        originalConfig._retry = false;
         try {
           const rs = await http_auth.get("/refresh", {
-            headers: { refreshToken: localStorage.getItem("refreshToken")},
+            headers: { refreshToken: localStorage.getItem("refreshToken") },
           });
 
           const accessToken = rs.data.accessToken;
@@ -64,7 +62,6 @@ http.interceptors.response.use(
       }
     }
     logout();
-    navigate('/');
     return Promise.reject(err);
   }
 );

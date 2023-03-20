@@ -29,6 +29,8 @@ const DriverProfileForm = () => {
                 setFormState(currentUser)
                 setSelectedVehicleType(currentUser.vehicleType)
             })
+            .catch(error=>console.log(error)
+            )
     }, [])
 
     useEffect(() => {

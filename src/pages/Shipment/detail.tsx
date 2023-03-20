@@ -13,6 +13,8 @@ const ShipmentDetail = () => {
             .then(contact => {
                 setContactInfo(contact)
             })
+            .catch(error=>console.log(error)
+            )
     }, [])
 
     return (
