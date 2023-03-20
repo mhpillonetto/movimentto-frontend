@@ -6,23 +6,23 @@ const userType = Constants.userType
 type selectProps = {
     selected: string,
     options: string[],
+    defaultValue: string | "",
     setSelected: React.Dispatch<React.SetStateAction<string>>
 }
 
-const MvtSelect = ({selected, options, setSelected}: selectProps) => {
-    
+const MvtSelect = (props: selectProps) => {
     const handleChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
         const currentSelected = event.currentTarget.value
     
-        setSelected(currentSelected)
-      }, [selected])
+        props.setSelected(currentSelected)
+      }, [props.selected])
     
 
     return (
         <div>
             <select className="form-selec mt-3 mb-3" aria-label="Default select example" onChange={handleChange}>
-                <option defaultValue={userType.transportadora}>Selecione uma opção</option>
-                {options.map(opt => {
+                <option defaultValue={props.defaultValue}>Selecione uma opção</option>
+                {props.options.map(opt => {
                     return <option value={opt}>{opt}</option>
                 })}
             </select>

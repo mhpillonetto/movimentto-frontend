@@ -7,14 +7,20 @@ import "react-datepicker/dist/react-datepicker.css"
 
 import TextInput from '../input/TextInput'
 import NumericInput from '../input/NumericInput'
+import Constants from '../../data/constants'
+import MvtSelect from '../select/select'
 
 
 const CreateShipmentForm = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    const vehicleType = Constants.vehicleType
+    const productType = Constants.productType
 
     const emptyShipment = {} as Shipment
 
     const [formState, setFormState] = useState<Shipment>(emptyShipment)
+    const [selectedVehicleType, setSelectedVehicleType] = useState(vehicleType.truck)
+    const [selectedProductType, setselectedProductType] = useState(productType.diversos)
 
     const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const targetInput = event.currentTarget
@@ -32,9 +38,23 @@ const CreateShipmentForm = () => {
     const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
+
+        event.preventDefault()
+        const vehicleType = selectedVehicleType
+        const productType = selectedProductType
+        const newShipment = { ...formState, vehicleType, productType }
+
         console.log('====================================');
-        console.log(formState);
+        console.log(newShipment);
         console.log('====================================');
+
+        // try {
+        //     await editUser(editedDriver)
+        //     navigate('/inicio', { replace: true })
+        // } catch (error) {
+        //     console.log(error)
+        // }
+
     }, [formState]);
 
     return (
@@ -83,10 +103,9 @@ const CreateShipmentForm = () => {
                         onChange={(date) => setFormState({ ...formState, retrievalDate: date })}
                     />
                 </div>
-
             </div>
 
-            <NumericInput 
+            <NumericInput
                 value={formState.price}
                 handleChange={handleInputChange}
                 fieldName='price'
@@ -94,7 +113,45 @@ const CreateShipmentForm = () => {
                 required={false}
             />
 
-            <button type="submit" className="btn btn-primary mt-3">
+            <div>
+                <label htmlFor="phoneNumberInput" className="form-label">
+                    Tipo de veículo
+                </label>
+                <MvtSelect
+                    defaultValue=""
+                    selected={selectedVehicleType}
+                    setSelected={setSelectedVehicleType}
+                    options={[vehicleType.bitruck, vehicleType.carreta, vehicleType.truck]}
+                />
+            </div>
+
+            <TextInput
+                value={formState.product}
+                handleChange={handleInputChange}
+                fieldName='product'
+                label='Produto a ser entregue'
+                required={true}
+            />
+
+            <div>
+                <label htmlFor="phoneNumberInput" className="form-label">
+                    Espécie de produto
+                </label>
+                <MvtSelect
+                    defaultValue=""
+                    selected={selectedVehicleType}
+                    setSelected={setSelectedVehicleType}
+                    options={[
+                        productType.animais,
+                        productType.bigBag,
+                        productType.caixas,
+                        productType.diversos,
+                        productType.paletes
+                    ]}
+                />
+            </div>
+
+            <button type="submit" className="btn btn-primary mt-3 mb-5">
                 Enviar
             </button>
         </form>

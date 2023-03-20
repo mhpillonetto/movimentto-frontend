@@ -124,7 +124,12 @@ const DriverProfileForm = () => {
                 <label htmlFor="phoneNumberInput" className="form-label">
                     Tipo de veículo
                 </label>
-                <MvtSelect selected={selectedVehicleType} setSelected={setSelectedVehicleType} options={[vehicleType.bitruck, vehicleType.carreta, vehicleType.truck]} />
+                <MvtSelect 
+                    defaultValue=""
+                    selected={selectedVehicleType} 
+                    setSelected={setSelectedVehicleType} 
+                    options={[vehicleType.bitruck, vehicleType.carreta, vehicleType.truck]} 
+                />
             </div>
 
             <div className="mb-3">

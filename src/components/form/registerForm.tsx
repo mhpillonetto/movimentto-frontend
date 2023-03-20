@@ -112,7 +112,7 @@ const RegisterForm = () => {
         <label htmlFor="phoneNumberInput" className="form-label">
           Tipo de Usuário
         </label>
-        <MvtSelect selected={selectedUserType} options={[userType.motorista, userType.operador, userType.transportadora]} setSelected={setSelectedUserType} />
+        <MvtSelect defaultValue="" selected={selectedUserType} options={[userType.motorista, userType.operador, userType.transportadora]} setSelected={setSelectedUserType} />
       </div>
 
       <button type="submit" className="btn btn-primary">

@@ -10,6 +10,13 @@ const Constants = {
         carreta: "Carreta",
         truck: "Truck",
         bitruck: "Bitruck"
+    },
+    productType: {
+        animais: "Animais",
+        bigBag: "Big Bag",
+        caixas: "Caixas",
+        diversos: "Diversos",
+        paletes: "Paletes",
     }
 }
 
