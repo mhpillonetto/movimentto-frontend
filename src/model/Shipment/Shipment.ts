@@ -5,7 +5,7 @@ export default interface Shipment {
     retrievalLocation: string
     retrievalDate: Date
     observations: string
-    owner: string
+    owner: string | null
     createdAt: Date
     price: number
     requiredVehicle: string

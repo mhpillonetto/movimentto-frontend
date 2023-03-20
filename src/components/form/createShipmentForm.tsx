@@ -8,7 +8,7 @@ import TextInput from '../input/TextInput'
 import NumericInput from '../input/NumericInput'
 import Constants from '../../data/constants'
 import MvtSelect from '../select/select'
-
+import { createShipment } from '../../services/Shipment/createShipment'
 
 const CreateShipmentForm = () => {
     const navigate = useNavigate()
@@ -36,20 +36,19 @@ const CreateShipmentForm = () => {
 
     const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const vehicleType = selectedVehicleType
+        const requiredVehicle = selectedVehicleType
         const productType = selectedProductType
-        const newShipment = { ...formState, vehicleType, productType }
+        const owner = localStorage.getItem("userName")
 
-        console.log('====================================');
-        console.log(newShipment);
-        console.log('====================================');
-
-        // try {
-        //     await editUser(editedDriver)
-        //     navigate('/inicio', { replace: true })
-        // } catch (error) {
-        //     console.log(error)
-        // }
+        const newShipment = { ...formState, requiredVehicle, productType, owner }
+        
+        try {
+            await createShipment(newShipment)
+            navigate('/inicio', { replace: true })
+        } catch (error) {
+            window.alert('Erro ao criar carga')
+            console.log(error)
+        }
 
     }, [formState]);
 
@@ -150,20 +149,20 @@ const CreateShipmentForm = () => {
                 <label htmlFor="shipmentTypeArea">Tipo de Carga</label>
 
                 <div className='ml-3'>
-                <input
-                    type="radio" 
-                    value="Completa" 
-                    onChange={handleInputChange} 
-                    name="shipmentType"
-                />
-                <label htmlFor="shipmentTypeInput">Completa</label>
-            
+                    <input
+                        type="radio"
+                        value="Completa"
+                        onChange={handleInputChange}
+                        name="shipmentType"
+                    />
+                    <label htmlFor="shipmentTypeInput">Completa</label>
+
                 </div>
-                
+
                 <input
-                    type="radio" 
-                    value="Complemento" 
-                    onChange={handleInputChange} 
+                    type="radio"
+                    value="Complemento"
+                    onChange={handleInputChange}
                     name="shipmentType"
                 />
                 <label htmlFor="shipmentTypeInput">Complemento</label>
@@ -176,7 +175,14 @@ const CreateShipmentForm = () => {
                 label='Peso em kg'
                 required={false}
             />
-            
+
+            <TextInput
+                value={formState.observations}
+                handleChange={handleInputChange}
+                fieldName='observations'
+                label='Observações'
+                required={true}
+            />
 
             <button type="submit" className="btn btn-primary mt-3 mb-5">
                 Enviar
