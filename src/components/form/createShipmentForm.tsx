@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Shipment from '../../model/Shipment/Shipment'
-// import DateInput from '../DateInput'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -36,9 +35,6 @@ const CreateShipmentForm = () => {
 
 
     const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-
-
         event.preventDefault()
         const vehicleType = selectedVehicleType
         const productType = selectedProductType
@@ -139,8 +135,8 @@ const CreateShipmentForm = () => {
                 </label>
                 <MvtSelect
                     defaultValue=""
-                    selected={selectedVehicleType}
-                    setSelected={setSelectedVehicleType}
+                    selected={selectedProductType}
+                    setSelected={setselectedProductType}
                     options={[
                         productType.animais,
                         productType.bigBag,
@@ -150,6 +146,37 @@ const CreateShipmentForm = () => {
                     ]}
                 />
             </div>
+            <div>
+                <label htmlFor="shipmentTypeArea">Tipo de Carga</label>
+
+                <div className='ml-3'>
+                <input
+                    type="radio" 
+                    value="Completa" 
+                    onChange={handleInputChange} 
+                    name="shipmentType"
+                />
+                <label htmlFor="shipmentTypeInput">Completa</label>
+            
+                </div>
+                
+                <input
+                    type="radio" 
+                    value="Complemento" 
+                    onChange={handleInputChange} 
+                    name="shipmentType"
+                />
+                <label htmlFor="shipmentTypeInput">Complemento</label>
+            </div>
+
+            <NumericInput
+                value={formState.weight}
+                handleChange={handleInputChange}
+                fieldName='weight'
+                label='Peso em kg'
+                required={false}
+            />
+            
 
             <button type="submit" className="btn btn-primary mt-3 mb-5">
                 Enviar
