@@ -8,10 +8,5 @@ export const getContactInfo = async (username: string) => {
         throw new Error()
     }
 
-
-    console.log('====================================');
-    console.log(data);
-    console.log('====================================');
-
     return data
 }
