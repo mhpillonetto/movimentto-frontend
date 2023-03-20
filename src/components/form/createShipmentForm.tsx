@@ -181,7 +181,7 @@ const CreateShipmentForm = () => {
                 handleChange={handleInputChange}
                 fieldName='observations'
                 label='Observações'
-                required={true}
+                required={false}
             />
 
             <button type="submit" className="btn btn-primary mt-3 mb-5">

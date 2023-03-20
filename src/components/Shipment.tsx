@@ -7,10 +7,13 @@ const ShipmentItem = (shipment: Shipment) => {
   return (
     <div>
       <h4>{shipment.title}</h4>
-      <p>Entrega: {shipment.deliveryLocation}</p>
-      <p>Retirada: {shipment.retrievalLocation}</p>
+      <p>Origem: {shipment.retrievalLocation}</p>
+      <p>Destino: {shipment.deliveryLocation}</p>
       <p>Postado por: {shipment.owner}</p>
-      <p>Postado em: 11:00</p>
+      <p>Produto: {shipment.product}</p>
+      <p>Espécie: {shipment.productType}</p>
+      <p>Veículo: {shipment.requiredVehicle}</p>
+      <p>Preço: {shipment.price}</p>
       <Link to='/cargas/detalhes' state={shipment}>Mais Informações</Link>
     </div>
   )
