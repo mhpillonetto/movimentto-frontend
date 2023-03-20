@@ -6,7 +6,7 @@ import Shipment from '../model/Shipment/Shipment'
 const ShipmentItem = (shipment: Shipment) => {
   return (
     <div>
-      <h4>{shipment.name}</h4>
+      <h4>{shipment.title}</h4>
       <p>Entrega: {shipment.deliveryLocation}</p>
       <p>Retirada: {shipment.retrievalLocation}</p>
       <p>Postado por: {shipment.owner}</p>

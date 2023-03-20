@@ -1,19 +1,26 @@
 import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Shipment from '../../model/Shipment/Shipment'
-import { login } from '../../services/Auth/login'
+// import DateInput from '../DateInput'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css"
+
+import TextInput from '../TextInput'
 
 
 const CreateShipmentForm = () => {
 
     const [formState, setFormState] = useState<Shipment>({
-        name: "",
+        title: "",
         deliveryLocation: "",
+        deliveryDate: new Date(),
         retrievalLocation: "",
+        retrievalDate: new Date(),
         owner: "",
         createdAt: new Date(),
         price: 0,
         requiredVehicle: "",
+        observations: ""
     })
 
     const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,64 +32,67 @@ const CreateShipmentForm = () => {
             ...formState,
             [name]: value,
         })
-    }, [formState])
 
+    }, [formState])
 
     const navigate = useNavigate();
 
     const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        // const { username, password } = formState;
-
-        // if (!username || !password) {
-        //     window.alert("Fill all the required fields")
-        //     return
-        // }
-
-        // try {
-        //     await login(formState)
-        //     navigate('/inicio', { replace: true })
-
-        // } catch (error) {
-        //     console.log(error);
-        //     window.alert("Usuário ou senha incorretos")
-        // }
-
+        console.log('====================================');
+        console.log(formState);
+        console.log('====================================');
     }, [formState]);
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-                <label htmlFor="exampleInputUsername" className="form-label">
-                    Título
+            <TextInput
+                value={formState.title}
+                handleChange={handleInputChange}
+                fieldName='title'
+                label='Título da carga'
+                required={true}
+            />
+
+            <TextInput
+                value={formState.deliveryLocation}
+                handleChange={handleInputChange}
+                fieldName='deliveryLocation'
+                label='Local de Entrega'
+                required={true}
+            />
+
+            <div style={{ flexDirection: "row" }}>
+                <label htmlFor='deliveryDateInput' className="form-label">
+                    Data da Entrega
                 </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    name="username"
-                    required
-                    value={formState.name}
-                    onChange={handleInputChange}
+                <DatePicker
+                    selected={formState.deliveryDate}
+                    onChange={(date) => setFormState({ ...formState, deliveryDate: date })}
+                />
+            </div>
+            <TextInput
+                value={formState.retrievalLocation}
+                handleChange={handleInputChange}
+                fieldName='retrievalLocation'
+                label='Local de Retirada'
+                required={true}
+            />
+
+            <div style={{ flexDirection: "row" }}>
+                <label htmlFor='retrievalDateInput' className="form-label">
+                    Data da Retirada
+                </label>
+                <DatePicker
+                    selected={formState.retrievalDate}
+                    onChange={(date) => setFormState({ ...formState, retrievalDate: date })}
                 />
             </div>
 
-            <div className="mb-3">
-                <label htmlFor="retrievalInput" className="form-label">
-                    Local de Retirada
-                </label>
-                <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    required
-                    value={formState.requiredVehicle}
-                    onChange={handleInputChange}
-                />
-            </div>
-            <button type="submit" className="btn btn-primary">
+
+
+            <button type="submit" className="btn btn-primary mt-3">
                 Enviar
             </button>
         </form>

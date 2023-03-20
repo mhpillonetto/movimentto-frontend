@@ -6,13 +6,16 @@ import { getAllShipments } from '../../services/Shipment/getAllShipments'
 
 const Shipments = () => {
   const [shipmentsList, setShipmentsList] = useState([{
-    name: "",
+    title: "",
     deliveryLocation: "",
+    deliveryDate: new Date(),
     retrievalLocation: "",
+    retrievalDate: new Date(),
     owner: "",
     createdAt: new Date(),
     price: 0,
     requiredVehicle: "",
+    observations: ""
   }])
 
   useEffect(() => {
@@ -20,13 +23,13 @@ const Shipments = () => {
       .then(list => {
         setShipmentsList(list)
       })
-  },[])
+  }, [])
 
   return (
     <div className='container'>
       <h1>Cargas disponíveis</h1>
       <ul>
-        {shipmentsList.map(shipment => <li className='container mt-5 border' key={shipment.name}><ShipmentItem {...shipment} /></li>)}
+        {shipmentsList.map(shipment => <li className='container mt-5 border' key={shipment.title}><ShipmentItem {...shipment} /></li>)}
       </ul>
     </div>
   )
