@@ -62,9 +62,6 @@ http.interceptors.response.use(
         }
       }
     }
-    console.log('====================================');
-    console.log('saindo');
-    console.log('====================================');
     logout();
     return Promise.reject(err);
   }

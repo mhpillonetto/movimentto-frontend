@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import ShipmentItem from '../../components/Shipment'
 import Shipment from '../../model/Shipment/Shipment'
@@ -17,6 +18,13 @@ const Shipments = () => {
       })
       .catch(error => console.log(error)
       )
+  }, [])
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!localStorage.userName) {
+      navigate('/', { replace: true })
+    }
   }, [])
 
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getContactInfo } from '../../services/User/getContactInfo';
 
 const ShipmentDetail = () => {
@@ -16,6 +16,14 @@ const ShipmentDetail = () => {
             .catch(error=>console.log(error)
             )
     }, [])
+
+
+    const navigate = useNavigate()
+    useEffect(()=>{
+        if(!localStorage.userName){
+          navigate('/', { replace: true })
+        }
+      },[])
 
     return (
         <div className='container mt-5'>
