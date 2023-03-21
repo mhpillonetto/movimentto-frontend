@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Shipment from './components/Shipment';
 import './index.css';
+import Checkin from './pages/Checkin';
 import Home from './pages/Home';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
@@ -48,7 +49,10 @@ const router = createBrowserRouter([
     path: "/cargas/anuciar",
     element: <CreateShipment />
   },
-  
+  {
+    path: "/checkin",
+    element: <Checkin />
+  },
 
 ])
 

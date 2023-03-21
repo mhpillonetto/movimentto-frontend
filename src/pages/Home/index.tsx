@@ -20,6 +20,7 @@ const Home = () => {
       <p><Link to='/perfil'>Editar Perfil</Link></p>
       <p><Link to='/cargas'>Cargas Disponíveis</Link></p>
       {localStorage.userType != Constants.userType.motorista ? <p><Link to='/cargas/anuciar'>Anunciar uma Carga</Link></p> : null}
+      {localStorage.userType != Constants.userType.transportadora ? <p><Link to='/checkin'>Fazer Check-in</Link></p> : null}
       <div>
         <button className="btn btn-primary mt-5" onClick={handleLogout}>
           Sair
