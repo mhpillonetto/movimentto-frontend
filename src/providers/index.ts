@@ -57,10 +57,14 @@ http.interceptors.response.use(
 
           return http(originalConfig);
         } catch (_error) {
+          logout();
           return Promise.reject(_error);
         }
       }
     }
+    console.log('====================================');
+    console.log('saindo');
+    console.log('====================================');
     logout();
     return Promise.reject(err);
   }
