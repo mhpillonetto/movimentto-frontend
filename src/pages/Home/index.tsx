@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import Heading from '../../components/Heading'
+import Constants from '../../data/constants';
 import { logout } from '../../services/Auth/logout';
 
 const Home = () => {
@@ -18,7 +19,7 @@ const Home = () => {
       <div className='mb-5'>Bem vindo ao perfil de {localStorage.userType}</div>
       <p><Link to='/perfil'>Editar Perfil</Link></p>
       <p><Link to='/cargas'>Cargas Disponíveis</Link></p>
-      <p><Link to='/cargas/anuciar'>Anunciar uma Carga</Link></p>
+      {localStorage.userType != Constants.userType.motorista ? <p><Link to='/cargas/anuciar'>Anunciar uma Carga</Link></p> : null}
       <div>
         <button className="btn btn-primary mt-5" onClick={handleLogout}>
           Sair
