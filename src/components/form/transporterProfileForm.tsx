@@ -9,17 +9,10 @@ const userType = Constants.userType
 
 const TransporterProfileForm = () => {
     const navigate = useNavigate()
+    
+    const emptyTransporter = {username:localStorage.userName} as Transporter 
 
-    //getUser assincrono para setar o objeto com os valores ja existentes
-    const [formState, setFormState] = useState<Transporter>({
-        username: localStorage?.getItem("userName") || "",
-        email: "",
-        cnpj: "",
-        contactName: "",
-        contactPhoneNumber: "",
-        website: "",
-        cep: ""
-    })
+    const [formState, setFormState] = useState<Transporter>(emptyTransporter)
 
     useEffect(() => {
         getUserByUsername(formState?.username)

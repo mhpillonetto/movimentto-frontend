@@ -5,21 +5,16 @@ import Driver from '../../model/User/Driver'
 import Constants from '../../data/constants'
 import MvtSelect from '../select/select'
 import { getUserByUsername } from '../../services/User/getUserByUsername'
+import TextInput from '../input/TextInput'
 
 const vehicleType = Constants.vehicleType
 
-const OperatorProfileForm = () => {
+const DriverProfileForm = () => {
     const navigate = useNavigate()
 
-    //getUser assincrono para setar o objeto com os valores ja existentes
-    const [formState, setFormState] = useState<Driver>({
-        username: localStorage?.getItem("userName") || "",
-        email: "",
-        cpf: "",
-        phoneNumber: "",
-        licensePlate: "",
-        vehicleType: ""
-    })
+    const emptyDriver = { username: localStorage.userName } as Driver
+
+    const [formState, setFormState] = useState<Driver>(emptyDriver)
 
     const [selectedVehicleType, setSelectedVehicleType] = useState(vehicleType.truck)
 
@@ -29,7 +24,7 @@ const OperatorProfileForm = () => {
                 setFormState(currentUser)
                 setSelectedVehicleType(currentUser.vehicleType)
             })
-            .catch(error=>console.log(error)
+            .catch(error => console.log(error)
             )
     }, [])
 
@@ -63,96 +58,64 @@ const OperatorProfileForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-                <label htmlFor="usernameInput" className="form-label">
-                    Nome de usuário
-                </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    name="username"
-                    required
-                    disabled
-                    value={formState.username}
-                    onChange={handleInputChange}
-                />
-            </div>
+            <TextInput
+                value={formState.username}
+                handleChange={handleInputChange}
+                fieldName='username'
+                label='Nome de Usuário'
+                required={true}
+                disabled={true}
+            />
 
-            <div className="mb-3">
-                <label htmlFor="emailInput" className="form-label">
-                    E-mail
-                </label>
-                <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    required
-                    value={formState.email}
-                    onChange={handleInputChange}
-                />
-            </div>
+            <TextInput
+                value={formState.email}
+                handleChange={handleInputChange}
+                fieldName='email'
+                label='E-mail'
+                required={true}
+            />
 
-            <div className="mb-3">
-                <label htmlFor="cpfInput" className="form-label">
-                    CPF
-                </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="cpf"
-                    name="cpf"
-                    value={formState.cpf}
-                    onChange={handleInputChange}
-                />
-            </div>
+            <TextInput
+                value={formState.cpf}
+                handleChange={handleInputChange}
+                fieldName='cpf'
+                label='CPF'
+                required={false}
+            />
 
-            <div className="mb-3">
-                <label htmlFor="phoneNumberInput" className="form-label">
-                    Telefone Celular
-                </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    value={formState.phoneNumber}
-                    onChange={handleInputChange}
-                />
-            </div>
+            <TextInput
+                value={formState.phoneNumber}
+                handleChange={handleInputChange}
+                fieldName='phoneNumber'
+                label='Telefone Celular (com DDD)'
+                required={false}
+            />
 
             <div>
                 <label htmlFor="phoneNumberInput" className="form-label">
                     Tipo de veículo
                 </label>
-                <MvtSelect 
+                <MvtSelect
                     defaultValue=""
-                    selected={selectedVehicleType} 
-                    setSelected={setSelectedVehicleType} 
-                    options={[vehicleType.bitruck, vehicleType.carreta, vehicleType.truck]} 
+                    selected={selectedVehicleType}
+                    setSelected={setSelectedVehicleType}
+                    options={[vehicleType.bitruck, vehicleType.carreta, vehicleType.truck]}
                 />
             </div>
 
-            <div className="mb-3">
-                <label htmlFor="licensePlateInput" className="form-label">
-                    Placa
-                </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="licensePlate"
-                    name="licensePlate"
-                    value={formState.licensePlate}
-                    onChange={handleInputChange}
-                />
-            </div>
+            <TextInput
+                value={formState.licensePlate}
+                handleChange={handleInputChange}
+                fieldName='licensePlate'
+                label='Placa do veículo'
+                required={false}
+            />
 
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary mt-3">
                 Salvar
             </button>
         </form>
     )
 }
 
-export default OperatorProfileForm
+export default DriverProfileForm

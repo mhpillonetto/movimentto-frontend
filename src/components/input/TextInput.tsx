@@ -5,7 +5,8 @@ interface TextInputProps {
     fieldName: string
     handleChange: React.ChangeEventHandler<HTMLInputElement>
     label: string
-    required: boolean | undefined
+    required?: boolean
+    disabled?: boolean 
 }
 
 const TextInput = (props: TextInputProps) => {
@@ -20,6 +21,7 @@ const TextInput = (props: TextInputProps) => {
                 id={`${props.fieldName}`}
                 name={`${props.fieldName}`}
                 required={props.required}
+                disabled={props.disabled}
                 value={props.value}
                 onChange={props.handleChange}
             />

@@ -44,7 +44,7 @@ const CreateShipmentForm = () => {
         
         try {
             await createShipment(newShipment)
-            navigate('/inicio', { replace: true })
+            navigate('/motoristas', { replace: true })
         } catch (error) {
             window.alert('Erro ao criar carga')
             console.log(error)
