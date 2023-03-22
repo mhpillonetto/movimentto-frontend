@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Transporter from '../../model/User/Transporter';
 import { getContactInfo } from '../../services/User/getContactInfo';
+import { getUserByUsername } from '../../services/User/getUserByUsername';
 
 const ShipmentDetail = () => {
     let { state } = useLocation();
     const shipment = state;
-    
-    const [contactInfo, setContactInfo] = useState({name: "", phoneNumber: ""})
+
+    const emptyTransporter = {} as Transporter
+    const [contactInfo, setContactInfo] = useState(emptyTransporter)
 
     useEffect(() => {
-        getContactInfo(shipment.owner)
+        getUserByUsername(shipment.owner)
             .then(contact => {
                 setContactInfo(contact)
             })
-            .catch(error=>console.log(error)
+            .catch(error => console.log(error)
             )
     }, [])
 
 
     const navigate = useNavigate()
-    useEffect(()=>{
-        if(!localStorage.userName){
-          navigate('/', { replace: true })
+    useEffect(() => {
+        if (!localStorage.userName) {
+            navigate('/', { replace: true })
         }
-      },[])
+    }, [])
 
     return (
         <div className='container mt-5'>
@@ -37,14 +40,15 @@ const ShipmentDetail = () => {
                 <p>Postado por {shipment.owner}</p>
                 <p>Veículo requisitado: {shipment.requiredVehicle}</p>
                 <p>Espécie: {shipment.productType}</p>
-                {shipment.weight ? <p>Peso total: {shipment.weight}</p>: null}
+                {shipment.weight ? <p>Peso total: {shipment.weight}</p> : null}
                 {shipment.shipmentType ? <p>Tipo de Carga: {shipment.shipmentType}</p> : null}
                 <h5 className='mt-3'>Preço: {shipment.price}</h5>
             </div>
             <div>
                 <h3 className='mt-3'>Contato</h3>
-                <p>{contactInfo.name}</p>
-                <p>{contactInfo.phoneNumber}</p>
+                <p>{contactInfo.contactName}</p>
+                <p>{contactInfo.contactPhoneNumber}</p>
+                <Link to='/transportadora' state={ contactInfo }>Mais informações</Link>
             </div>
 
         </div>
