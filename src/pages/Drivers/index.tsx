@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import DriverListItem from '../../components/Driver'
+import DriverListItem from '../../components/DriverListItem'
 import { getCheckedInDrivers } from '../../services/Driver/getCheckedInDrivers'
 import Driver from '../../model/User/Driver'
 import { AxiosResponse } from 'axios'
@@ -12,8 +12,6 @@ const Drivers = () => {
     useEffect(() => {
         getCheckedInDrivers()
             .then(res => {
-                console.log(res.data);
-                
                 setDriversList(res.data)
             })
             .catch(error => console.log(error)
