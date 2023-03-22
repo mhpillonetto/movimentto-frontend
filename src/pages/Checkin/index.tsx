@@ -18,20 +18,20 @@ const Checkin = () => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setPosition(position.coords)
     })
-
-
   }, [])
 
   useEffect(() => {
-    reverseGeocoding(position.latitude, position.longitude)
-      .then(result => setLocation(result)
-      )
+    if (position.latitude !== 0 && position.latitude !== 0) {
+      reverseGeocoding(position.latitude, position.longitude)
+        .then(result => setLocation(result)
+        )
+    }
   }, [position])
 
 
   const handleCheckin = async () => {
     try {
-      await checkin(position)
+      await checkin(position, location)
       window.alert('Check-in realizado com sucesso!')
       navigate('/cargas', { replace: true })
     }
@@ -41,7 +41,8 @@ const Checkin = () => {
   }
   return (
     <div className='container mt-5'>
-      <h2>Confirme suas informações</h2><br />
+      <h2>Confirme sua Localização</h2><br />
+      <p>Permita que o navegador acesse sua localização</p>
       <h5>Cidade: {location.city}</h5>
       <h5>Estado: {location.state}</h5><br />
       <button
