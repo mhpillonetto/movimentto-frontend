@@ -1,29 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DriverListItem from '../../components/Driver'
+import { getCheckedInDrivers } from '../../services/Driver/getCheckedInDrivers'
+import Driver from '../../model/User/Driver'
+import { AxiosResponse } from 'axios'
 
 const Drivers = () => {
-    const driversList = [
-        {
-            name: "Jose da Silva",
-            vehicleType: "Carreta",
-            phoneNumber: "(41)912345678"
-        },
-        {
-            name: "Joao Pereira",
-            vehicleType: "Carreta",
-            phoneNumber: "(55)912345678"
-        },
-        {
-            name: "Fulano de Tal",
-            vehicleType: "Truck",
-            phoneNumber: "(42)912345678"
-        }
-    ]
+    const emptyDriversList = [] as Driver[]
+
+    const [driversList, setDriversList] = useState<AxiosResponse | null | void | Driver[]>(emptyDriversList)
+
+    useEffect(() => {
+        getCheckedInDrivers()
+            .then(res => {
+                console.log(res.data);
+                
+                setDriversList(res.data)
+            })
+            .catch(error => console.log(error)
+            )
+    }, [])
     return (
         <div className='container mt-5'>
             <h1>Motoristas Disponíveis</h1>
             <ul>
-                {driversList.map(driver => <li className='container mt-5 border' key={driver.name}><DriverListItem {...driver} /></li>)}
+                {
+                    Array.isArray(driversList) ? 
+                    driversList.map(driver => <li className='container mt-5 border' key={driver.username}><DriverListItem {...driver} /></li>)
+                        : null
+                }
             </ul>
         </div>
     )
