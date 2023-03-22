@@ -8,7 +8,7 @@ const Checkin = () => {
     latitude: 0,
     longitude: 0
   })
-  useEffect(() => {
+  useEffect(() => {    
     navigator.geolocation.getCurrentPosition(function (position) {
       setPosition(position.coords)
     });

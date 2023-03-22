@@ -7,6 +7,7 @@ import {
 import Shipment from './components/Shipment';
 import './index.css';
 import Checkin from './pages/Checkin';
+import Drivers from './pages/Drivers';
 import Home from './pages/Home';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
@@ -53,7 +54,10 @@ const router = createBrowserRouter([
     path: "/checkin",
     element: <Checkin />
   },
-
+  {
+    path: "/motoristas",
+    element: <Drivers />
+  },
 ])
 
 const root = ReactDOM.createRoot(
