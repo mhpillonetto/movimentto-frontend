@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { checkin } from '../../services/Checkin';
+import { reverseGeocoding } from '../../services/Geocoding/forwardGeocoding';
 
 const Checkin = () => {
   const navigate = useNavigate()
@@ -8,17 +9,31 @@ const Checkin = () => {
     latitude: 0,
     longitude: 0
   })
-  useEffect(() => {    
+  const [location, setLocation] = useState({
+    city: "",
+    state: ""
+  })
+
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setPosition(position.coords)
-    });
+    })
+
+
   }, [])
+
+  useEffect(() => {
+    reverseGeocoding(position.latitude, position.longitude)
+      .then(result => setLocation(result)
+      )
+  }, [position])
+
 
   const handleCheckin = async () => {
     try {
       await checkin(position)
       window.alert('Check-in realizado com sucesso!')
-      navigate('/cargas', {replace: true})
+      navigate('/cargas', { replace: true })
     }
     catch (error) {
       window.alert('erro ao realizar o checkin')
@@ -27,8 +42,8 @@ const Checkin = () => {
   return (
     <div className='container mt-5'>
       <h2>Confirme suas informações</h2><br />
-      <h5>Latitude: {position.latitude}</h5>
-      <h5>Longitude: {position.longitude}</h5><br />
+      <h5>Cidade: {location.city}</h5>
+      <h5>Estado: {location.state}</h5><br />
       <button
         type="submit"
         className="btn btn-primary mt-3"

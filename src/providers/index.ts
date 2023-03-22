@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Constants from '../data/constants'
 import { logout } from "../services/Auth/logout";
 
-const serviceURI = Constants.serviceURI
+const {serviceURI, geocodingURI} = Constants
 
 export const http_auth = axios.create({
   baseURL: serviceURI,
@@ -19,7 +19,6 @@ export const http = axios.create({
     // Authorization: `Bearer ${localStorage.getItem("jwt")}`
   }
 })
-
 
 http.interceptors.request.use(
   (config) => {
@@ -66,3 +65,7 @@ http.interceptors.response.use(
     return Promise.reject(err);
   }
 );
+
+export const geocode = axios.create({
+  baseURL: geocodingURI
+})
