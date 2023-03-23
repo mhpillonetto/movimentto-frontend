@@ -7,9 +7,17 @@ const Constants = {
         operador: "Operador"
     },
     vehicleType: {
+        tresQuartos: "3/4",
+        fiorino: "Fiorino",
+        toco: "Toco",
+        vlc: "VLC",
         carreta: "Carreta",
         truck: "Truck",
-        bitruck: "Bitruck"
+        bitruck: "Bitruck",
+        bitrem: "Bitrem",
+        carretaLS: "Carreta LS",
+        rodotrem: "Rodotrem",
+        vanderleia: "Vanderléia"
     },
     productType: {
         animais: "Animais",

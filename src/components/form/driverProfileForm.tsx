@@ -88,14 +88,36 @@ const DriverProfileForm = () => {
                 label='Telefone Celular (com DDD)'
                 required={false}
             />
-
-            <div>
+            
+            <h3 className='mt-3'>Tipo de veículo</h3>
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                 <RadioButtonGroup
-                    label="Tipo de veículo"
+                    label="Leves"
+                    options={[
+                        { name: "vehicleType", label: vehicleType.tresQuartos, value: vehicleType.tresQuartos },
+                        { name: "vehicleType", label: vehicleType.fiorino, value: vehicleType.fiorino },
+                        { name: "vehicleType", label: vehicleType.toco, value: vehicleType.toco },
+                        { name: "vehicleType", label: vehicleType.vlc, value: vehicleType.vlc }
+                    ]}
+                    onChange={handleInputChange}
+                />
+                <RadioButtonGroup
+                    label="Médios"
                     options={[
                         { name: "vehicleType", label: vehicleType.bitruck, value: vehicleType.bitruck },
-                        { name: "vehicleType", label: vehicleType.carreta, value: vehicleType.carreta },
                         { name: "vehicleType", label: vehicleType.truck, value: vehicleType.truck }
+                    ]}
+                    onChange={handleInputChange}
+                />
+                <RadioButtonGroup
+                    label="Pesados"
+                    options={[
+                        { name: "vehicleType", label: vehicleType.bitrem, value: vehicleType.bitrem },
+                        { name: "vehicleType", label: vehicleType.carreta, value: vehicleType.carreta },
+                        { name: "vehicleType", label: vehicleType.carretaLS, value: vehicleType.carretaLS },
+                        { name: "vehicleType", label: vehicleType.rodotrem, value: vehicleType.rodotrem },
+                        { name: "vehicleType", label: vehicleType.vanderleia, value: vehicleType.vanderleia }
+
                     ]}
                     onChange={handleInputChange}
                 />
