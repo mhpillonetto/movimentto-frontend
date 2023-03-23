@@ -6,6 +6,7 @@ import Constants from '../../data/constants'
 import MvtSelect from '../select/select'
 import { getUserByUsername } from '../../services/User/getUserByUsername'
 import TextInput from '../input/TextInput'
+import RadioButtonGroup from '../ui/radioButtonGroup'
 
 const vehicleType = Constants.vehicleType
 
@@ -16,21 +17,14 @@ const DriverProfileForm = () => {
 
     const [formState, setFormState] = useState<Driver>(emptyDriver)
 
-    const [selectedVehicleType, setSelectedVehicleType] = useState(vehicleType.truck)
-
     useEffect(() => {
         getUserByUsername(formState?.username)
             .then(currentUser => {
                 setFormState(currentUser)
-                setSelectedVehicleType(currentUser.vehicleType)
             })
             .catch(error => console.log(error)
             )
     }, [])
-
-    useEffect(() => {
-        setFormState({ ...formState, vehicleType: selectedVehicleType })
-    }, [selectedVehicleType])
 
     const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const targetInput = event.currentTarget
@@ -41,12 +35,16 @@ const DriverProfileForm = () => {
             ...formState,
             [name]: value,
         })
+
     }, [formState])
 
     const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const vehicleType = selectedVehicleType
-        const editedDriver = { ...formState, vehicleType }
+        const editedDriver = { ...formState }
+
+        console.log('====================================');
+        console.log(editedDriver);
+        console.log('====================================');
         try {
             await editUser(editedDriver)
             navigate('/inicio', { replace: true })
@@ -92,14 +90,14 @@ const DriverProfileForm = () => {
             />
 
             <div>
-                <label htmlFor="phoneNumberInput" className="form-label">
-                    Tipo de veículo
-                </label>
-                <MvtSelect
-                    defaultValue=""
-                    selected={selectedVehicleType}
-                    setSelected={setSelectedVehicleType}
-                    options={[vehicleType.bitruck, vehicleType.carreta, vehicleType.truck]}
+                <RadioButtonGroup
+                    label="Tipo de veículo"
+                    options={[
+                        { name: "vehicleType", label: vehicleType.bitruck, value: vehicleType.bitruck },
+                        { name: "vehicleType", label: vehicleType.carreta, value: vehicleType.carreta },
+                        { name: "vehicleType", label: vehicleType.truck, value: vehicleType.truck }
+                    ]}
+                    onChange={handleInputChange}
                 />
             </div>
 
@@ -107,9 +105,25 @@ const DriverProfileForm = () => {
                 value={formState.licensePlate}
                 handleChange={handleInputChange}
                 fieldName='licensePlate'
-                label='Placa do veículo'
+                label='Placa do Cavalo'
                 required={false}
             />
+
+            {/* <TextInput
+                value={formState.licensePlate}
+                handleChange={handleInputChange}
+                fieldName='licensePlate'
+                label='Placa do Complemento 1'
+                required={false}
+            />
+
+            <TextInput
+                value={formState.licensePlate}
+                handleChange={handleInputChange}
+                fieldName='licensePlate'
+                label='Placa do Complemento 2'
+                required={false}
+            /> */}
 
             <button type="submit" className="btn btn-primary mt-3">
                 Salvar

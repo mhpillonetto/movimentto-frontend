@@ -5,9 +5,6 @@ import { getUserByUsername } from '../../services/User/getUserByUsername';
 
 const TransporterDetails = () => {
     const { state } = useLocation();
-    console.log('====================================');
-    console.log(state);
-    console.log('====================================');
     return (
         <div className='container mt-5'>
             <h3>{state.username}</h3>
