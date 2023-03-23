@@ -42,9 +42,6 @@ const DriverProfileForm = () => {
         event.preventDefault()
         const editedDriver = { ...formState }
 
-        console.log('====================================');
-        console.log(editedDriver);
-        console.log('====================================');
         try {
             await editUser(editedDriver)
             navigate('/inicio', { replace: true })

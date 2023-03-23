@@ -107,7 +107,23 @@ const DriverProfileForm = () => {
                 value={formState.licensePlate}
                 handleChange={handleInputChange}
                 fieldName='licensePlate'
-                label='Placa do veículo'
+                label='Placa do Cavalo'
+                required={false}
+            />
+
+            <TextInput
+                value={formState.firstComplementLicensePlate}
+                handleChange={handleInputChange}
+                fieldName='firstComplementLicensePlate'
+                label='Placa do Complemento 1'
+                required={false}
+            />
+
+            <TextInput
+                value={formState.secondComplementLicensePlate}
+                handleChange={handleInputChange}
+                fieldName='secondComplementLicensePlate'
+                label='Placa do Complemento 2'
                 required={false}
             />
 

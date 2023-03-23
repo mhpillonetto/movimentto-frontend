@@ -4,6 +4,8 @@ export default interface Operator {
     cpf: string
     phoneNumber: string
     licensePlate: string
+    firstComplementLicensePlate: string
+    secondComplementLicensePlate: string
     vehicleType: string
     lastCheckIn: Date
     lat: number
