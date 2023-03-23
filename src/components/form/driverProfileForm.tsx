@@ -131,21 +131,21 @@ const DriverProfileForm = () => {
                 required={false}
             />
 
-            {/* <TextInput
-                value={formState.licensePlate}
+            <TextInput
+                value={formState.firstComplementLicensePlate}
                 handleChange={handleInputChange}
-                fieldName='licensePlate'
+                fieldName='firstComplementLicensePlate'
                 label='Placa do Complemento 1'
                 required={false}
             />
 
             <TextInput
-                value={formState.licensePlate}
+                value={formState.secondComplementLicensePlate}
                 handleChange={handleInputChange}
-                fieldName='licensePlate'
+                fieldName='secondComplementLicensePlate'
                 label='Placa do Complemento 2'
                 required={false}
-            /> */}
+            />
 
             <button type="submit" className="btn btn-primary mt-3">
                 Salvar

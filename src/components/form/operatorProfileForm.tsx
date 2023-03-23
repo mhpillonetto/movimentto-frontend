@@ -1,20 +1,20 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { editUser } from '../../services/User/editUser'
-import Driver from '../../model/User/Driver'
 import Constants from '../../data/constants'
 import MvtSelect from '../select/select'
 import { getUserByUsername } from '../../services/User/getUserByUsername'
 import TextInput from '../input/TextInput'
+import Operator from '../../model/User/Operator'
 
 const vehicleType = Constants.vehicleType
 
 const DriverProfileForm = () => {
     const navigate = useNavigate()
 
-    const emptyDriver = { username: localStorage.userName } as Driver
+    const emptyOperator = { username: localStorage.userName } as Operator
 
-    const [formState, setFormState] = useState<Driver>(emptyDriver)
+    const [formState, setFormState] = useState<Operator>(emptyOperator)
 
     const [selectedVehicleType, setSelectedVehicleType] = useState(vehicleType.truck)
 
@@ -46,9 +46,9 @@ const DriverProfileForm = () => {
     const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const vehicleType = selectedVehicleType
-        const editedDriver = { ...formState, vehicleType }
+        const editedOperator = { ...formState, vehicleType }
         try {
-            await editUser(editedDriver)
+            await editUser(editedOperator)
             navigate('/inicio', { replace: true })
         } catch (error) {
             console.log(error)
