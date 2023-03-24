@@ -4,18 +4,16 @@ import Constants from '../../data/constants'
 import { createNewUser } from '../../services/Auth/createNewUser'
 import User from '../../model/User/User'
 import MvtSelect from '../select/select'
+import TextInput from '../input/TextInput'
 
 const userType = Constants.userType
 
 const RegisterForm = () => {
   const navigate = useNavigate();
 
-  const [formState, setFormState] = useState<User>({
-    username: "",
-    email: "",
-    password: "",
-    userType: userType.transportadora
-  })
+  const emptyUser = {} as User
+
+  const [formState, setFormState] = useState<User>(emptyUser)
 
   const [selectedUserType, setSelectedUserType] = useState(userType.transportadora)
 
@@ -35,10 +33,10 @@ const RegisterForm = () => {
   const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const { username, email, password } = formState;
+    const { username, email, password, phoneNumber } = formState;
     const userType = selectedUserType;
 
-    if (!email || !username || !password || !userType) {
+    if (!email || !username || !password || !userType || !phoneNumber) {
       window.alert("Preencha todos os campos")
       return
     }
@@ -47,7 +45,8 @@ const RegisterForm = () => {
       username,
       email,
       password,
-      userType
+      userType,
+      phoneNumber
     }
 
     try {
@@ -107,6 +106,14 @@ const RegisterForm = () => {
           onChange={handleInputChange}
         />
       </div>
+
+      <TextInput
+        value={formState.phoneNumber}
+        handleChange={handleInputChange}
+        fieldName='phoneNumber'
+        label='Telefone Celular (com DDD)'
+        required={true}
+      />
 
       <div>
         <label htmlFor="phoneNumberInput" className="form-label">

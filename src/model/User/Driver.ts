@@ -1,6 +1,7 @@
-export default interface Driver {
-    username: string
-    email: string
+import User from "./User"
+
+export default interface Driver extends User {
+    displayName: string
     cpf: string
     phoneNumber: string
     licensePlate: string

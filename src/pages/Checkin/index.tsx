@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { checkin } from '../../services/Checkin';
-import { reverseGeocoding } from '../../services/Geocoding/forwardGeocoding';
+import { reverseGeocoding } from '../../services/Geocoding/reverseGeocoding';
 
 const Checkin = () => {
   const navigate = useNavigate()

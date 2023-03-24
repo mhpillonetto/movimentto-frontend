@@ -11,7 +11,3 @@ export const reverseGeocoding = async (lat, long) => {
     }
     return retrievedAddress
 }
-
-export const forwardGeocoding = async (city, state) => {
-    return
-}

@@ -4,13 +4,14 @@ import { login } from './login'
 
 
 export const createNewUser = async (newUser: User) => {
-    const { username, password, email, userType } = newUser
+    const { username, password, email, userType, phoneNumber } = newUser
     try {
         await http_auth.post(`register`, {
             user: username,
             pwd: password,
             email,
-            userType
+            userType,
+            phoneNumber
         })
 
         await login({username, password})
