@@ -7,8 +7,8 @@ const TransporterDetails = () => {
     const { state } = useLocation();
     return (
         <div className='container mt-5'>
-            <h3>{state.username}</h3>
-            <p>Telefone para contato: {state.contactPhoneNumber}</p>
+            <h3>{state.displayName}</h3>
+            <p>Telefone para contato: {state.phoneNumber}</p>
             <p>Responsável: {state.contactName}</p>
             <p>{state.email}</p>
             <p>CEP: {state.cep}</p>

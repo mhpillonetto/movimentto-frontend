@@ -14,9 +14,9 @@ import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
-import Shipments from './pages/Shipment';
+import Shipments from './pages/Shipment/shipmentsList';
 import CreateShipment from './pages/Shipment/createShipment';
-import ShipmentDetail from './pages/Shipment/detail';
+import ShipmentDetail from './pages/Shipment/shipmentDetail';
 import TransporterDetails from './pages/Transporter';
 
 const router = createBrowserRouter([

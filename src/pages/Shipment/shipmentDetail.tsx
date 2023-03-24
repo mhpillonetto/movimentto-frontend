@@ -37,7 +37,7 @@ const ShipmentDetail = () => {
                 <p>Data da retirada: {shipment.retrievalDate}</p>
                 <p>Destino {shipment.deliveryLocation} </p>
                 <p>Data da entrega: {shipment.deliveryDate}</p>
-                <p>Postado por {shipment.owner}</p>
+                <p>Postado por {contactInfo.displayName}</p>
                 <p>Veículo requisitado: {shipment.requiredVehicle}</p>
                 <p>Espécie: {shipment.productType}</p>
                 {shipment.weight ? <p>Peso total: {shipment.weight}</p> : null}
@@ -47,7 +47,7 @@ const ShipmentDetail = () => {
             <div>
                 <h3 className='mt-3'>Contato</h3>
                 <p>{contactInfo.contactName}</p>
-                <p>{contactInfo.contactPhoneNumber}</p>
+                <p>{contactInfo.phoneNumber}</p>
                 <Link to='/transportadora' state={ contactInfo }>Mais informações</Link>
             </div>
 

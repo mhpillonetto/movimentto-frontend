@@ -38,13 +38,16 @@ const CreateShipmentForm = () => {
         event.preventDefault()
         const requiredVehicle = selectedVehicleType
         const productType = selectedProductType
-        const owner = localStorage.getItem("userName")
+        const ownerDisplayName = localStorage.getItem("displayName")
+        const ownerUsername = localStorage.getItem("userName") || ""
 
-        const newShipment = { ...formState, requiredVehicle, productType, owner }
-        
+        const newShipment = { ...formState, requiredVehicle, productType, ownerDisplayName, ownerUsername }
+
         try {
-            await createShipment(newShipment)
-            navigate('/motoristas', { replace: true })
+            if (newShipment.ownerUsername) {
+                await createShipment(newShipment)
+                navigate('/motoristas', { replace: true })
+            }
         } catch (error) {
             window.alert('Erro ao criar carga')
             console.log(error)

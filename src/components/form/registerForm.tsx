@@ -63,32 +63,22 @@ const RegisterForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label htmlFor="exampleInputUsername" className="form-label">
-          Nome de usuário
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="username"
-          name="username"
-          required
+        <TextInput
           value={formState.username}
-          onChange={handleInputChange}
+          handleChange={handleInputChange}
+          fieldName='username'
+          label='Nome de usuário'
+          required={true}
         />
       </div>
 
       <div className="mb-3">
-        <label htmlFor="exampleInputEmail1" className="form-label">
-          E-mail
-        </label>
-        <input
-          type="email"
-          className="form-control"
-          id="email"
-          name="email"
-          required
+        <TextInput
           value={formState.email}
-          onChange={handleInputChange}
+          handleChange={handleInputChange}
+          fieldName='email'
+          label='E-mail'
+          required={true}
         />
       </div>
 
@@ -116,13 +106,13 @@ const RegisterForm = () => {
       />
 
       <div>
-        <label htmlFor="phoneNumberInput" className="form-label">
+        <label htmlFor="phoneNumberInput" className="form-label mt-3">
           Tipo de Usuário
         </label>
         <MvtSelect defaultValue="" selected={selectedUserType} options={[userType.motorista, userType.operador, userType.transportadora]} setSelected={setSelectedUserType} />
       </div>
 
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-primary mt-3">
         Enviar
       </button>
     </form>

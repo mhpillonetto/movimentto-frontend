@@ -68,6 +68,14 @@ const DriverProfileForm = () => {
             />
 
             <TextInput
+                value={formState.displayName}
+                handleChange={handleInputChange}
+                fieldName='displayName'
+                label='Nome da Empresa'
+                required={false}
+            />
+
+            <TextInput
                 value={formState.email}
                 handleChange={handleInputChange}
                 fieldName='email'

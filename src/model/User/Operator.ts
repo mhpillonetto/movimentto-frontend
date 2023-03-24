@@ -1,9 +1,9 @@
-export default interface Operator {
-    username: string
+import User from "./User"
+
+export default interface Operator extends User {
     displayName: string
     email: string
     cpf: string
-    phoneNumber: string
     licensePlate: string
     firstComplementLicensePlate: string
     secondComplementLicensePlate: string

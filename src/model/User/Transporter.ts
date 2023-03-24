@@ -1,10 +1,11 @@
-export default interface Transporter {
+import User from "./User"
+
+export default interface Transporter extends User {
     username: string
     displayName: string
     email: string
     cnpj: string
     contactName: string
-    contactPhoneNumber: string
     website: string
     cep: string
 }

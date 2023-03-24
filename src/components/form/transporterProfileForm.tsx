@@ -4,20 +4,21 @@ import Transporter from '../../model/User/Transporter'
 import { useNavigate } from 'react-router-dom'
 import { editUser } from '../../services/User/editUser'
 import { getUserByUsername } from '../../services/User/getUserByUsername'
+import TextInput from '../input/TextInput'
 
 const userType = Constants.userType
 
 const TransporterProfileForm = () => {
     const navigate = useNavigate()
-    
-    const emptyTransporter = {username:localStorage.userName} as Transporter 
+
+    const emptyTransporter = { username: localStorage.userName } as Transporter
 
     const [formState, setFormState] = useState<Transporter>(emptyTransporter)
 
     useEffect(() => {
         getUserByUsername(formState?.username)
             .then(currentUser => setFormState(currentUser))
-            .catch(error=>console.log(error))
+            .catch(error => console.log(error))
     }, [])
 
     const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,35 +46,36 @@ const TransporterProfileForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div className="mb-3">
-                <label htmlFor="usernameInput" className="form-label">
-                    Nome de usuário
-                </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    name="username"
-                    required
-                    disabled
+                <TextInput
                     value={formState.username}
-                    onChange={handleInputChange}
+                    handleChange={handleInputChange}
+                    fieldName='username'
+                    label='Nome de Usuário'
+                    required={true}
+                    disabled={true}
                 />
             </div>
 
             <div className="mb-3">
-                <label htmlFor="emailInput" className="form-label">
-                    E-mail
-                </label>
-                <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    required
-                    value={formState.email}
-                    onChange={handleInputChange}
+                <TextInput
+                    value={formState.displayName}
+                    handleChange={handleInputChange}
+                    fieldName='displayName'
+                    label='Nome da Empresa'
+                    required={false}
                 />
             </div>
+
+            <div className="mb-3">
+                <TextInput
+                    value={formState.email}
+                    handleChange={handleInputChange}
+                    fieldName='email'
+                    label='E-mail'
+                    required={true}
+                />
+            </div>
+
 
             <div className="mb-3">
                 <label htmlFor="cnpjInput" className="form-label">
@@ -101,15 +103,15 @@ const TransporterProfileForm = () => {
                     value={formState.contactName}
                     onChange={handleInputChange}
                 />
-                <label htmlFor="contactPhoneNumberInput" className="form-label">
+                <label htmlFor="phoneNumberInput" className="form-label">
                     Telefone do responsável
                 </label>
                 <input
                     type="text"
                     className="form-control"
-                    id="contactPhoneNumber"
-                    name="contactPhoneNumber"
-                    value={formState.contactPhoneNumber}
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    value={formState.phoneNumber}
                     onChange={handleInputChange}
                 />
             </div>
