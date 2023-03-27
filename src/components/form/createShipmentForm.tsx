@@ -40,8 +40,8 @@ const CreateShipmentForm = () => {
         const productType = selectedProductType
         const ownerDisplayName = localStorage.getItem("displayName")
         const ownerUsername = localStorage.getItem("userName") || ""
-
-        const newShipment = { ...formState, requiredVehicle, productType, ownerDisplayName, ownerUsername }
+        const createdAt = new Date()
+        const newShipment = { ...formState, requiredVehicle, productType, ownerDisplayName, ownerUsername, createdAt }
 
         try {
             if (newShipment.ownerUsername) {
