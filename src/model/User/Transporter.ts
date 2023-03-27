@@ -8,4 +8,5 @@ export default interface Transporter extends User {
     contactName: string
     website: string
     cep: string
+    address: string
 }

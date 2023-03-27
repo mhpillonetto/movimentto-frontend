@@ -6,8 +6,6 @@ import { editUser } from '../../services/User/editUser'
 import { getUserByUsername } from '../../services/User/getUserByUsername'
 import TextInput from '../input/TextInput'
 
-const userType = Constants.userType
-
 const TransporterProfileForm = () => {
     const navigate = useNavigate()
 
@@ -78,69 +76,59 @@ const TransporterProfileForm = () => {
 
 
             <div className="mb-3">
-                <label htmlFor="cnpjInput" className="form-label">
-                    CNPJ
-                </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="cnpj"
-                    name="cnpj"
+                <TextInput
                     value={formState.cnpj}
-                    onChange={handleInputChange}
+                    handleChange={handleInputChange}
+                    fieldName='cnpj'
+                    label='CNPJ'
                 />
             </div>
 
-            <div className="mb-3">
-                <label htmlFor="contactNameInput" className="form-label">
-                    Nome do responsável
-                </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="contactName"
-                    name="contactName"
-                    value={formState.contactName}
-                    onChange={handleInputChange}
-                />
-                <label htmlFor="phoneNumberInput" className="form-label">
-                    Telefone do responsável
-                </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    value={formState.phoneNumber}
-                    onChange={handleInputChange}
-                />
+            <div className="d-flex justify-content-between mb-3">
+                <div>
+                    <TextInput
+                        value={formState.contactName}
+                        handleChange={handleInputChange}
+                        fieldName='contactName'
+                        label='Nome do responsável'
+                    />
+                </div>
+                <div>
+                    <TextInput
+                        value={formState.phoneNumber}
+                        handleChange={handleInputChange}
+                        fieldName='phoneNumber'
+                        label='Telefone do responsável'
+                    />
+                </div>
+
+
             </div>
 
             <div className="mb-3">
-                <label htmlFor="websiteInput" className="form-label">
-                    Website
-                </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="website"
-                    name="website"
+                <TextInput
                     value={formState.website}
-                    onChange={handleInputChange}
+                    handleChange={handleInputChange}
+                    fieldName='website'
+                    label='Website'
                 />
             </div>
 
             <div className="mb-3">
-                <label htmlFor="cepInput" className="form-label">
-                    CEP
-                </label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="cep"
-                    name="cep"
+                <TextInput
                     value={formState.cep}
-                    onChange={handleInputChange}
+                    handleChange={handleInputChange}
+                    fieldName='cep'
+                    label='CEP'
+                />
+            </div>
+
+            <div className="mb-3">
+                <TextInput
+                    value={formState.address}
+                    handleChange={handleInputChange}
+                    fieldName='address'
+                    label='Endereço'
                 />
             </div>
 

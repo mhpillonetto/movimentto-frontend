@@ -31,7 +31,7 @@ const Home = () => {
   return (
     <div className='container mt-5'>
       <Heading title={"Essa é sua página inicial"} />
-      <div className='mb-5'>Bem vindo ao perfil de {localStorage.getItem("displayName")}</div>
+      <div className='mb-5'>Bem vindo(a), {localStorage.getItem("displayName")}!</div>
       <p><Link to='/perfil'>Editar Perfil</Link></p>
       <p><Link to='/cargas'>Cargas Disponíveis</Link></p>
       {localStorage.userType !== Constants.userType.motorista ? <p><Link to='/cargas/anuciar'>Anunciar uma Carga</Link></p> : null}
