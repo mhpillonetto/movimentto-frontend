@@ -10,10 +10,11 @@ const DriverListItem = (props) => {
 
     return (
         <div onClick={handleClick} style={{cursor: 'pointer'}}>
-            <p>{props.username}</p>
+            <p>{props.displayName ? props.displayName : "Nome não registrado"}</p>
             <p>{props.vehicleType ? props.vehicleType : "veículo nao listado"}</p>
             <p>{props.phoneNumber ? props.phoneNumber : "telefone nao listado"}</p>
             <p>{props.city} - {props.state}</p>
+            <p>Status: {props.status}</p>
         </div>
     )
 }

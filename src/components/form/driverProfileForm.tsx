@@ -62,6 +62,13 @@ const DriverProfileForm = () => {
             />
 
             <TextInput
+                value={formState.displayName}
+                handleChange={handleInputChange}
+                fieldName='displayName'
+                label='Nome Completo'
+            />
+
+            <TextInput
                 value={formState.email}
                 handleChange={handleInputChange}
                 fieldName='email'
@@ -84,9 +91,9 @@ const DriverProfileForm = () => {
                 label='Telefone Celular (com DDD)'
                 required={false}
             />
-            
+
             <h3 className='mt-3'>Tipo de veículo</h3>
-            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                 <RadioButtonGroup
                     label="Leves"
                     options={[
