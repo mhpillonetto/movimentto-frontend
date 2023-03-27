@@ -50,7 +50,7 @@ const CreateShipmentForm = () => {
             }
         } catch (error) {
             window.alert('Erro ao criar carga')
-            console.log(error)
+            console.log(error)  
         }
 
     }, [formState]);
