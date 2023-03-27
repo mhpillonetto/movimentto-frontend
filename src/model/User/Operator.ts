@@ -11,4 +11,7 @@ export default interface Operator extends User {
     lastCheckIn: Date
     lat: number
     long: number
+    cep: string
+    address: string
+    antt: string
 }

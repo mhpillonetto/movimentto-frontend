@@ -9,4 +9,5 @@ export default interface Transporter extends User {
     website: string
     cep: string
     address: string
+    antt: string
 }

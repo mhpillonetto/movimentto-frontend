@@ -4,7 +4,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Shipment from './components/Shipment';
+import Shipment from './components/ShipmentListItem';
 import './index.css';
 import Checkin from './pages/Checkin';
 import Drivers from './pages/Drivers';

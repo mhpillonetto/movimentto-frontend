@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import ShipmentItem from '../../components/Shipment'
+import ShipmentItem from '../../components/ShipmentListItem'
 import Shipment from '../../model/Shipment/Shipment'
 import { getAllShipments } from '../../services/Shipment/getAllShipments'
 
@@ -11,10 +11,16 @@ const Shipments = () => {
 
   const [shipmentsList, setShipmentsList] = useState([emptyShipment])
 
+
+
   useEffect(() => {
     getAllShipments()
       .then(list => {
-        setShipmentsList(list)
+        const newList = list.sort((a,b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+        console.log('====================================');
+        console.log(newList);
+        console.log('====================================');
+        setShipmentsList(list.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
       })
       .catch(error => console.log(error)
       )

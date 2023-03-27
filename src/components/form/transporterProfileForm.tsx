@@ -132,6 +132,15 @@ const TransporterProfileForm = () => {
                 />
             </div>
 
+            <div className="mb-3">
+                <TextInput
+                    value={formState.antt}
+                    handleChange={handleInputChange}
+                    fieldName='antt'
+                    label='Registro ANTT'
+                />
+            </div>
+
             <button type="submit" className="btn btn-primary">
                 Salvar
             </button>
