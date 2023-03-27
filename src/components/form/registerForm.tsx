@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Constants from '../../data/constants'
 import { createNewUser } from '../../services/Auth/createNewUser'
@@ -27,7 +27,6 @@ const RegisterForm = () => {
       [name]: value,
     })
   }, [formState])
-
 
 
   const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
@@ -106,7 +105,7 @@ const RegisterForm = () => {
       />
 
       <div>
-        <label htmlFor="phoneNumberInput" className="form-label mt-3">
+        <label htmlFor="userTypeInput" className="form-label mt-3">
           Tipo de Usuário
         </label>
         <MvtSelect defaultValue="" selected={selectedUserType} options={[userType.motorista, userType.operador, userType.transportadora]} setSelected={setSelectedUserType} />

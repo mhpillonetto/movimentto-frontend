@@ -8,6 +8,7 @@ import statesList from '../../data/states.json';
 import citiesList from '../../data/cities.json';
 import { geocode } from '../../providers';
 import { forwardGeocoding } from '../../services/Geocoding/forwardGeocoding';
+import RadioButtonGroup from '../../components/ui/radioButtonGroup';
 
 const Checkin = () => {
   const navigate = useNavigate()
@@ -16,8 +17,9 @@ const Checkin = () => {
     city: "",
     state: ""
   })
+  const [filteredCitiesList, setFilteredCitiesList] = useState(['', ''])
+  const [status, setStatus] = useState('')
 
-  const [filteredCitiesList,setFilteredCitiesList] = useState(['',''])
 
   const handleSelectState = (selectedState) => {
     setLocation({
@@ -33,21 +35,29 @@ const Checkin = () => {
     })
   }
 
-  useEffect(()=>{
-    if(location.state){
+  const handleSelectStatus = (selectedStatus) => {
+    setStatus(selectedStatus.target.value)
+  }
+
+  useEffect(() => {
+    if (location.state) {
       const filtered = citiesList.estados
-      .filter(function (estado){
-        return estado.sigla === location.state;
-      })
+        .filter(function (estado) {
+          return estado.sigla === location.state;
+        })
       setFilteredCitiesList(filtered[0].cidades)
     }
-  },[location.state])
+  }, [location.state])
 
   const handleCheckin = async () => {
     try {
-      const position = await forwardGeocoding(location.city, location.state)
-
-      await checkin(position, location)
+      // const position = await forwardGeocoding(location.city, location.state)
+      const position = {
+        lat: -25.459935,
+        long: -49.280018
+      }
+      await checkin(position, location, status)
+    
       window.alert('Check-in realizado com sucesso!')
       navigate('/cargas', { replace: true })
     }
@@ -56,11 +66,10 @@ const Checkin = () => {
     }
   }
 
-
   return (
     <div className='container mt-5'>
       <h2>Confirme sua Localização</h2><br />
-      <p>Permita que o navegador acesse sua localização</p>
+      {/* <p>Permita que o navegador acesse sua localização</p> */}
       <div>
         <h5>Estado</h5>
         <select onChange={event => handleSelectState(event.target.value)}>
@@ -74,11 +83,23 @@ const Checkin = () => {
         <h5>Cidade</h5>
         <select onChange={event => handleSelectCity(event.target.value)}>
           {
-            filteredCitiesList.map( city => {
+            filteredCitiesList.map(city => {
               return <option value={city}>{city}</option>
             })
           }
         </select>
+      </div>
+
+      <div className='mt-3'>
+        <RadioButtonGroup
+          label="Status de carregamento"
+          options={[
+            { name: "vehicleType", label: "Carregado", value: "Carregado" },
+            { name: "vehicleType", label: "Parcialmente Carregado", value: "Parcialmente Carregado" },
+            { name: "vehicleType", label: "Vazio", value: "Vazio" }
+          ]}
+          onChange={handleSelectStatus}
+        />
       </div>
 
       <button

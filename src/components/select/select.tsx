@@ -13,7 +13,6 @@ type selectProps = {
 const MvtSelect = (props: selectProps) => {
     const handleChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
         const currentSelected = event.currentTarget.value
-    
         props.setSelected(currentSelected)
       }, [props.selected])
     
@@ -21,6 +20,7 @@ const MvtSelect = (props: selectProps) => {
     return (
         <div>
             <select className="form-selec mt-3 mb-3" aria-label="Default select example" onChange={handleChange}>
+                <option defaultValue={props.defaultValue}>Selecione uma opção</option>
                 {props.options.map(opt => {
                     return <option value={opt}>{opt}</option>
                 })}
