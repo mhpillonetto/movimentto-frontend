@@ -4,7 +4,6 @@ export default interface Shipment {
     deliveryDate: Date
     retrievalLocation: string
     retrievalDate: Date
-    observations: string
     ownerUsername: string
     ownerDisplayName: string | null
     createdAt: Date
@@ -12,6 +11,9 @@ export default interface Shipment {
     requiredVehicle: string
     product: string
     productType: string
-    shipmentType: string
+    complement: string
     weight: number
+    tracking: string
+    flooringType: string
+    necessaryItems: string
 }

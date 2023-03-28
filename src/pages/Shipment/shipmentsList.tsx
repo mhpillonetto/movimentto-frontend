@@ -16,10 +16,6 @@ const Shipments = () => {
   useEffect(() => {
     getAllShipments()
       .then(list => {
-        const newList = list.sort((a,b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
-        console.log('====================================');
-        console.log(newList);
-        console.log('====================================');
         setShipmentsList(list.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
       })
       .catch(error => console.log(error)

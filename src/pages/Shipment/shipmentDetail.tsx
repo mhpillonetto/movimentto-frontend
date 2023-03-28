@@ -12,7 +12,7 @@ const ShipmentDetail = () => {
     const [contactInfo, setContactInfo] = useState(emptyTransporter)
 
     useEffect(() => {
-        getUserByUsername(shipment.owner)
+        getUserByUsername(shipment.ownerUsername)
             .then(contact => {
                 setContactInfo(contact)
             })
@@ -37,12 +37,15 @@ const ShipmentDetail = () => {
                 <p>Data da retirada: {shipment.retrievalDate}</p>
                 <p>Destino {shipment.deliveryLocation} </p>
                 <p>Data da entrega: {shipment.deliveryDate}</p>
-                <p>Postado por {contactInfo.displayName}</p>
+                <p>Postado por {shipment.ownerDisplayName}</p>
                 <p>Veículo requisitado: {shipment.requiredVehicle}</p>
                 <p>Espécie: {shipment.productType}</p>
                 {shipment.weight ? <p>Peso total: {shipment.weight}</p> : null}
-                {shipment.shipmentType ? <p>Tipo de Carga: {shipment.shipmentType}</p> : null}
+                {shipment.complement ? <p>Tipo de Carga: {shipment.complement}</p> : null}
+                {shipment.flooringType ? <p>Peso total: {shipment.flooringType}</p> : null}
+                {shipment.necessaryItems ? <p>Peso total: {shipment.necessaryItems}</p> : null}
                 <h5 className='mt-3'>Preço: {shipment.price}</h5>
+
             </div>
             <div>
                 <h3 className='mt-3'>Contato</h3>

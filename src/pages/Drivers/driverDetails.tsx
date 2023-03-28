@@ -6,11 +6,12 @@ const DriverDetails = () => {
 
     return (
         <div className='container mt-5'>
-            <h3>{state.driver.username}</h3>
-            <p>{state.driver.vehicleType}</p>
+            <h3>{state.driver.displayName}</h3>
+            <p>Veículo: {state.driver.vehicleType}</p>
             <p>{state.driver.phoneNumber}</p>
-            <p>{state.driver.city} - {state.driver.state}</p>
-            <p>{state.driver.lastCheckIn}</p>
+            <p>Localização: {state.driver.city} - {state.driver.state}</p>
+            <p>Status do veículo: {state.driver.status}</p>
+            <p>Check-in as: {new Date(state.driver.lastCheckIn).toLocaleTimeString('pt-br')}</p>
         </div>
     )
 }

@@ -9,6 +9,7 @@ import NumericInput from '../input/NumericInput'
 import Constants from '../../data/constants'
 import MvtSelect from '../select/select'
 import { createShipment } from '../../services/Shipment/createShipment'
+import RadioButtonGroup from '../ui/radioButtonGroup'
 
 const CreateShipmentForm = () => {
     const navigate = useNavigate()
@@ -18,7 +19,6 @@ const CreateShipmentForm = () => {
     const emptyShipment = {} as Shipment
 
     const [formState, setFormState] = useState<Shipment>(emptyShipment)
-    const [selectedVehicleType, setSelectedVehicleType] = useState(vehicleType.truck)
     const [selectedProductType, setselectedProductType] = useState(productType.diversos)
 
     const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,12 +36,11 @@ const CreateShipmentForm = () => {
 
     const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const requiredVehicle = selectedVehicleType
         const productType = selectedProductType
         const ownerDisplayName = localStorage.getItem("displayName")
         const ownerUsername = localStorage.getItem("userName") || ""
         const createdAt = new Date()
-        const newShipment = { ...formState, requiredVehicle, productType, ownerDisplayName, ownerUsername, createdAt }
+        const newShipment = { ...formState, productType, ownerDisplayName, ownerUsername, createdAt }
 
         try {
             if (newShipment.ownerUsername) {
@@ -50,8 +49,9 @@ const CreateShipmentForm = () => {
             }
         } catch (error) {
             window.alert('Erro ao criar carga')
-            console.log(error)  
+            console.log(error)
         }
+
 
     }, [formState]);
 
@@ -111,15 +111,37 @@ const CreateShipmentForm = () => {
                 required={false}
             />
 
-            <div>
-                <label htmlFor="phoneNumberInput" className="form-label">
-                    Tipo de veículo
-                </label>
-                <MvtSelect
-                    defaultValue=""
-                    selected={selectedVehicleType}
-                    setSelected={setSelectedVehicleType}
-                    options={[vehicleType.bitruck, vehicleType.carreta, vehicleType.truck]}
+            <h3 className='mt-3'>Tipo de veículo</h3>
+            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                <RadioButtonGroup
+                    label="Leves"
+                    options={[
+                        { name: "requiredVehicle", label: vehicleType.tresQuartos, value: vehicleType.tresQuartos },
+                        { name: "requiredVehicle", label: vehicleType.fiorino, value: vehicleType.fiorino },
+                        { name: "requiredVehicle", label: vehicleType.toco, value: vehicleType.toco },
+                        { name: "requiredVehicle", label: vehicleType.vlc, value: vehicleType.vlc }
+                    ]}
+                    onChange={handleInputChange}
+                />
+                <RadioButtonGroup
+                    label="Médios"
+                    options={[
+                        { name: "requiredVehicle", label: vehicleType.bitruck, value: vehicleType.bitruck },
+                        { name: "requiredVehicle", label: vehicleType.truck, value: vehicleType.truck }
+                    ]}
+                    onChange={handleInputChange}
+                />
+                <RadioButtonGroup
+                    label="Pesados"
+                    options={[
+                        { name: "requiredVehicle", label: vehicleType.bitrem, value: vehicleType.bitrem },
+                        { name: "requiredVehicle", label: vehicleType.carreta, value: vehicleType.carreta },
+                        { name: "requiredVehicle", label: vehicleType.carretaLS, value: vehicleType.carretaLS },
+                        { name: "requiredVehicle", label: vehicleType.rodotrem, value: vehicleType.rodotrem },
+                        { name: "requiredVehicle", label: vehicleType.vanderleia, value: vehicleType.vanderleia }
+
+                    ]}
+                    onChange={handleInputChange}
                 />
             </div>
 
@@ -148,17 +170,18 @@ const CreateShipmentForm = () => {
                     ]}
                 />
             </div>
+
             <div>
-                <label htmlFor="shipmentTypeArea">Tipo de Carga</label>
+                <label htmlFor="complementArea">Tipo de Carga</label>
 
                 <div className='ml-3'>
                     <input
                         type="radio"
                         value="Completa"
                         onChange={handleInputChange}
-                        name="shipmentType"
+                        name="complement"
                     />
-                    <label htmlFor="shipmentTypeInput">Completa</label>
+                    <label htmlFor="complement">Completa</label>
 
                 </div>
 
@@ -166,9 +189,31 @@ const CreateShipmentForm = () => {
                     type="radio"
                     value="Complemento"
                     onChange={handleInputChange}
-                    name="shipmentType"
+                    name="complement"
                 />
-                <label htmlFor="shipmentTypeInput">Complemento</label>
+                <label htmlFor="complementInput">Complemento</label>
+            </div>
+
+            <div>
+                <label htmlFor="trackingArea">Rastreador</label>
+                <div>
+                    <input
+                        type="radio"
+                        value="tracked"
+                        onChange={handleInputChange}
+                        name="tracking"
+                    />
+                    <label htmlFor="trackingInput">Sim</label>
+
+                </div>
+
+                <input
+                    type="radio"
+                    value="untracked"
+                    onChange={handleInputChange}
+                    name="tracking"
+                />
+                <label htmlFor="trackingInput">Não</label>
             </div>
 
             <NumericInput
@@ -180,10 +225,17 @@ const CreateShipmentForm = () => {
             />
 
             <TextInput
-                value={formState.observations}
+                value={formState.flooringType}
                 handleChange={handleInputChange}
-                fieldName='observations'
-                label='Observações'
+                fieldName='flooringType'
+                label='Tipo do assoalho'
+            />
+
+            <TextInput
+                value={formState.necessaryItems}
+                handleChange={handleInputChange}
+                fieldName='necessaryItems'
+                label='Items necessários'
                 required={false}
             />
 
