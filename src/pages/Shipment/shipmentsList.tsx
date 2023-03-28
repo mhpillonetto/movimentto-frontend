@@ -11,6 +11,7 @@ const Shipments = () => {
   const emptyShipment = {} as Shipment
 
   const [shipmentsList, setShipmentsList] = useState([emptyShipment])
+  const [filteredShipmentsList, setFilteredShipmentsList] = useState([emptyShipment])
   const [deliveryCitiesList, setDeliveryCitiesList] = useState([''])
   const [retrievalCitiesList, setRetrievalCitiesList] = useState([''])
   const emptyFilter = {} as Shipment
@@ -21,10 +22,6 @@ const Shipments = () => {
       ...filter,
       [name]: value,
     })
-
-    console.log('====================================');
-    console.log(filter);
-    console.log('====================================');
   }, [filter])
 
   //get from backend, order by createdAt
@@ -32,9 +29,14 @@ const Shipments = () => {
     getAllShipments()
       .then(list => {
         setShipmentsList(list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+        setFilteredShipmentsList(shipmentsList)
       })
       .catch(error => console.log(error)
       )
+
+    console.log('====================================');
+    console.log(shipmentsList);
+    console.log('====================================');
   }, [])
 
   const navigate = useNavigate()
@@ -65,12 +67,15 @@ const Shipments = () => {
 
   //applies filter
   useEffect(() => {
-      const filteredShipmentsList = shipmentsList
+    console.log('====================================');
+    console.log(filter);
+    console.log('====================================');
+      const filtered = shipmentsList
         .filter((shipment) => {
-          return shipment === filter
+          return shipment.deliveryCity == filter.deliveryCity
         })
 
-        setShipmentsList(filteredShipmentsList)
+        setFilteredShipmentsList(filtered)
   }, [filter])
 
   return (
@@ -113,7 +118,7 @@ const Shipments = () => {
       </div>
 
       <ul>
-        {shipmentsList.map(shipment => <li className='container mt-5 border' key={shipment.title}><ShipmentItem {...shipment} /></li>)}
+        {filteredShipmentsList.map(shipment => <li className='container mt-5 border' key={shipment.title}><ShipmentItem {...shipment} /></li>)}
       </ul>
     </div>
   )

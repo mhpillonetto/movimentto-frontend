@@ -31,9 +31,8 @@ const ShipmentDetail = () => {
 
     return (
         <div className='container mt-5'>
-            <h1>{shipment.title}</h1>
+            <h3>{shipment.title}</h3>
             <div className='mt-3'>
-                <h2>{shipment.title}</h2>
                 <p>Origem {shipment.retrievalCity} - {shipment.retrievalState} </p>
                 <p><>Data da retirada: {new Date(shipment.retrievalDate).toLocaleDateString('pt-br')}</></p>
                 <p>Destino {shipment.deliveryCity} - {shipment.deliveryState} </p>
