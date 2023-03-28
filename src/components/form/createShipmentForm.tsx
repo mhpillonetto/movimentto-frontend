@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Shipment from '../../model/Shipment/Shipment'
 import DatePicker from 'react-datepicker'
@@ -10,6 +10,8 @@ import Constants from '../../data/constants'
 import MvtSelect from '../select/select'
 import { createShipment } from '../../services/Shipment/createShipment'
 import RadioButtonGroup from '../ui/radioButtonGroup'
+import statesList from '../../data/states.json';
+import citiesList from '../../data/cities.json';
 
 const CreateShipmentForm = () => {
     const navigate = useNavigate()
@@ -20,6 +22,15 @@ const CreateShipmentForm = () => {
 
     const [formState, setFormState] = useState<Shipment>(emptyShipment)
     const [selectedProductType, setselectedProductType] = useState(productType.diversos)
+    const [location, setLocation] = useState({
+        deliveryCity:"",
+        deliveryState:"",
+        retrievalCity:"",
+        retrievalState:""
+    })
+    const [retrievalCitiesList, setRetrievalCitiesList] = useState([''])
+    const [deliveryCitiesList, setDeliveryCitiesList] = useState([''])
+
 
     const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const targetInput = event.currentTarget
@@ -33,6 +44,30 @@ const CreateShipmentForm = () => {
 
     }, [formState])
 
+    const handleSelectLocation = (name, value) => {
+        setLocation({
+          ...location,
+          [name]: value,
+        })
+      }
+    
+    useEffect(()=>{
+        if (location.deliveryState) {
+            const filtered = citiesList.estados
+              .filter(function (estado) {
+                return estado.sigla === location.deliveryState;
+              })
+            setDeliveryCitiesList(filtered[0].cidades)
+          }
+      
+          if (location.retrievalState) {
+            const filtered = citiesList.estados
+              .filter(function (estado) {
+                return estado.sigla === location.retrievalState;
+              })
+            setRetrievalCitiesList(filtered[0].cidades)
+          }
+    },[location])
 
     const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -40,7 +75,11 @@ const CreateShipmentForm = () => {
         const ownerDisplayName = localStorage.getItem("displayName")
         const ownerUsername = localStorage.getItem("userName") || ""
         const createdAt = new Date()
-        const newShipment = { ...formState, productType, ownerDisplayName, ownerUsername, createdAt }
+        const newShipment = { ...formState,...location, productType, ownerDisplayName, ownerUsername, createdAt }
+
+        console.log('====================================');
+        console.log(newShipment);
+        console.log('====================================');
 
         try {
             if (newShipment.ownerUsername) {
@@ -51,8 +90,6 @@ const CreateShipmentForm = () => {
             window.alert('Erro ao criar carga')
             console.log(error)
         }
-
-
     }, [formState]);
 
     return (
@@ -61,18 +98,45 @@ const CreateShipmentForm = () => {
                 value={formState.title}
                 handleChange={handleInputChange}
                 fieldName='title'
-                label='Título da carga'
+                label='Título'
                 required={true}
             />
+            <div>
+                <h5>Entrega</h5>
+                <select onChange={event => handleSelectLocation("deliveryState", event.target.value)}>
+                    {statesList.UF.map(state => {
+                        return <option value={state.sigla}>{state.sigla}</option>
+                    })}
+                </select>
+                <select onChange={event => handleSelectLocation("deliveryCity", event.target.value)}>
+                    {
+                        deliveryCitiesList
+                            .map(city => {
+                                return <option value={city}>{city}</option>
+                            })
+                    }
+                </select>
+            </div>
 
             <div>
-                <TextInput
-                    value={formState.deliveryLocation}
-                    handleChange={handleInputChange}
-                    fieldName='deliveryLocation'
-                    label='Local de Entrega'
-                    required={true}
-                />
+                <h5>Retirada</h5>
+                <select onChange={event => handleSelectLocation("retrievalState", event.target.value)}>
+                    {statesList.UF.map(state => {
+                        return <option value={state.sigla}>{state.sigla}</option>
+                    })}
+                </select>
+
+                <select onChange={event => handleSelectLocation("retrievalCity", event.target.value,)}>
+                    {
+                        retrievalCitiesList
+                            .map(city => {
+                                return <option value={city}>{city}</option>
+                            })
+                    }
+                </select>
+            </div>
+            <div>
+
                 <div>
                     <label htmlFor='deliveryDateInput' className="form-label">
                         Data da Entrega
@@ -85,13 +149,6 @@ const CreateShipmentForm = () => {
             </div>
 
             <div>
-                <TextInput
-                    value={formState.retrievalLocation}
-                    handleChange={handleInputChange}
-                    fieldName='retrievalLocation'
-                    label='Local de Retirada'
-                    required={true}
-                />
                 <div>
                     <label htmlFor='retrievalDateInput' className="form-label">
                         Data da Retirada

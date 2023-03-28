@@ -1,8 +1,10 @@
 export default interface Shipment {
     title: string
-    deliveryLocation: string
+    deliveryCity: string
+    deliveryState: string
     deliveryDate: Date
-    retrievalLocation: string
+    retrievalCity: string
+    retrievalState: string
     retrievalDate: Date
     ownerUsername: string
     ownerDisplayName: string | null

@@ -7,25 +7,13 @@ import { getAllShipments } from '../../services/Shipment/getAllShipments'
 import statesList from '../../data/states.json';
 import citiesList from '../../data/cities.json';
 
-type Filter = {
-  deliveryCity: string
-  deliveryState: string
-  retrievalCity: string
-  retrievalState: string
-  vehicleType: string
-  carriageType: string
-  tracking: boolean
-  price: boolean
-  complement: boolean
-}
-
 const Shipments = () => {
   const emptyShipment = {} as Shipment
 
   const [shipmentsList, setShipmentsList] = useState([emptyShipment])
   const [deliveryCitiesList, setDeliveryCitiesList] = useState([''])
   const [retrievalCitiesList, setRetrievalCitiesList] = useState([''])
-  const emptyFilter = {} as Filter
+  const emptyFilter = {} as Shipment
   const [filter, setFilter] = useState(emptyFilter)
 
   const handleFilterChange = useCallback((name, value) => {
@@ -75,10 +63,11 @@ const Shipments = () => {
     }
   }, [filter])
 
+  //applies filter
   useEffect(() => {
       const filteredShipmentsList = shipmentsList
         .filter((shipment) => {
-          return shipment.deliveryLocation === filter.deliveryCity
+          return shipment === filter
         })
 
         setShipmentsList(filteredShipmentsList)

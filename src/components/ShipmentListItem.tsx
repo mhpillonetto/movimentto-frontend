@@ -11,11 +11,11 @@ const ShipmentItem = (shipment: Shipment) => {
       <h4>{shipment.title}</h4>
       <div className='d-flex flex-row justify-content-between'>
         <div className='d-flex flex-column justify-content-between'>
-          <p>Destino: {shipment.deliveryLocation}</p>
+          <p>Destino: {shipment.deliveryCity} - {shipment.deliveryState}</p>
           <p><>{new Date(shipment.deliveryDate).toLocaleDateString('pt-br')}</></p>
         </div>
         <div className='d-flex flex-column justify-content-between'>
-          <p>Origem: {shipment.retrievalLocation}</p>
+          <p>Origem: {shipment.retrievalCity} - {shipment.retrievalState}</p>
           <p><>{new Date(shipment.deliveryDate).toLocaleDateString('pt-br')}</></p>
         </div>
 
