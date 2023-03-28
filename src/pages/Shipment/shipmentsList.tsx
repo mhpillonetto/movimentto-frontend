@@ -23,10 +23,8 @@ const Shipments = () => {
   const emptyShipment = {} as Shipment
 
   const [shipmentsList, setShipmentsList] = useState([emptyShipment])
-
   const [deliveryCitiesList, setDeliveryCitiesList] = useState([''])
   const [retrievalCitiesList, setRetrievalCitiesList] = useState([''])
-
   const emptyFilter = {} as Filter
   const [filter, setFilter] = useState(emptyFilter)
 
@@ -41,25 +39,7 @@ const Shipments = () => {
     console.log('====================================');
   }, [filter])
 
-  //seta as cidades no select quando seleciona o estado
-  useEffect(() => {
-    if(filter.deliveryState) {
-      const filtered = citiesList.estados
-        .filter(function (estado) {
-          return estado.sigla === filter.deliveryState;
-        })
-      setDeliveryCitiesList(filtered[0].cidades)
-    }
-
-    if(filter.retrievalState) {
-      const filtered = citiesList.estados
-        .filter(function (estado) {
-          return estado.sigla === filter.retrievalState;
-        })
-      setRetrievalCitiesList(filtered[0].cidades)
-    }
-  }, [filter])
-
+  //get from backend, order by createdAt
   useEffect(() => {
     getAllShipments()
       .then(list => {
@@ -76,13 +56,41 @@ const Shipments = () => {
     }
   }, [])
 
+  //sets cities for selected states
+  useEffect(() => {
+    if (filter.deliveryState) {
+      const filtered = citiesList.estados
+        .filter(function (estado) {
+          return estado.sigla === filter.deliveryState;
+        })
+      setDeliveryCitiesList(filtered[0].cidades)
+    }
+
+    if (filter.retrievalState) {
+      const filtered = citiesList.estados
+        .filter(function (estado) {
+          return estado.sigla === filter.retrievalState;
+        })
+      setRetrievalCitiesList(filtered[0].cidades)
+    }
+  }, [filter])
+
+  useEffect(() => {
+      const filteredShipmentsList = shipmentsList
+        .filter((shipment) => {
+          return shipment.deliveryLocation === filter.deliveryCity
+        })
+
+        setShipmentsList(filteredShipmentsList)
+  }, [filter])
+
   return (
     <div className='container'>
       <h1>Cargas disponíveis</h1>
 
       <div>
         <h5>Entrega</h5>
-        <select onChange={event => handleFilterChange("deliveryState",event.target.value)}>
+        <select onChange={event => handleFilterChange("deliveryState", event.target.value)}>
           {statesList.UF.map(state => {
             return <option value={state.sigla}>{state.sigla}</option>
           })}
@@ -90,27 +98,27 @@ const Shipments = () => {
         <select onChange={event => handleFilterChange("deliveryCity", event.target.value,)}>
           {
             deliveryCitiesList
-            .map(city => {
-              return <option value={city}>{city}</option>
-            })
+              .map(city => {
+                return <option value={city}>{city}</option>
+              })
           }
         </select>
       </div>
 
       <div>
         <h5>Retirada</h5>
-        <select onChange={event => handleFilterChange("retrievalState",event.target.value)}>
+        <select onChange={event => handleFilterChange("retrievalState", event.target.value)}>
           {statesList.UF.map(state => {
             return <option value={state.sigla}>{state.sigla}</option>
           })}
         </select>
-        
+
         <select onChange={event => handleFilterChange("retrievalCity", event.target.value,)}>
           {
             retrievalCitiesList
-            .map(city => {
-              return <option value={city}>{city}</option>
-            })
+              .map(city => {
+                return <option value={city}>{city}</option>
+              })
           }
         </select>
       </div>
