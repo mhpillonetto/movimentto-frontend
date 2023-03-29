@@ -28,15 +28,12 @@ const Shipments = () => {
   useEffect(() => {
     getAllShipments()
       .then(list => {
-        setShipmentsList(list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
-        setFilteredShipmentsList(shipmentsList)
+        setShipmentsList(list)
+        setFilteredShipmentsList(list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
       })
       .catch(error => console.log(error)
       )
 
-    console.log('====================================');
-    console.log(shipmentsList);
-    console.log('====================================');
   }, [])
 
   const navigate = useNavigate()
@@ -70,53 +67,60 @@ const Shipments = () => {
     console.log('====================================');
     console.log(filter);
     console.log('====================================');
-      const filtered = shipmentsList
-        .filter((shipment) => {
-          return shipment.deliveryCity == filter.deliveryCity
-        })
+    const filtered = shipmentsList
+      .filter((shipment) => {
+        return (
+          (filter.deliveryCity ? shipment.deliveryCity === filter.deliveryCity : true) &&
+          (filter.deliveryCity ? shipment.deliveryCity === filter.deliveryCity : true)
+        )
+      })
 
-        setFilteredShipmentsList(filtered)
+    setFilteredShipmentsList(filtered)
   }, [filter])
 
   return (
     <div className='container'>
       <h1>Cargas disponíveis</h1>
-
+      {/* Filtro */}
       <div>
-        <h5>Entrega</h5>
-        <select onChange={event => handleFilterChange("deliveryState", event.target.value)}>
-          {statesList.UF.map(state => {
-            return <option value={state.sigla}>{state.sigla}</option>
-          })}
-        </select>
-        <select onChange={event => handleFilterChange("deliveryCity", event.target.value,)}>
-          {
-            deliveryCitiesList
-              .map(city => {
-                return <option value={city}>{city}</option>
-              })
-          }
-        </select>
+        <div>
+          <h5>Entrega</h5>
+          <select onChange={event => handleFilterChange("deliveryState", event.target.value)}>
+            {statesList.UF.map(state => {
+              return <option value={state.sigla}>{state.sigla}</option>
+            })}
+          </select>
+          <select onChange={event => handleFilterChange("deliveryCity", event.target.value,)}>
+            {
+              deliveryCitiesList
+                .map(city => {
+                  return <option value={city}>{city}</option>
+                })
+            }
+          </select>
+        </div>
+
+        <div>
+          <h5>Retirada</h5>
+          <select onChange={event => handleFilterChange("retrievalState", event.target.value)}>
+            {statesList.UF.map(state => {
+              return <option value={state.sigla}>{state.sigla}</option>
+            })}
+          </select>
+
+          <select onChange={event => handleFilterChange("retrievalCity", event.target.value,)}>
+            {
+              retrievalCitiesList
+                .map(city => {
+                  return <option value={city}>{city}</option>
+                })
+            }
+          </select>
+        </div>
+        <button type="reset" className="btn btn-primary mt-3 mb-5" onClick={()=>setFilter(emptyShipment)}>
+                Limpar
+        </button>
       </div>
-
-      <div>
-        <h5>Retirada</h5>
-        <select onChange={event => handleFilterChange("retrievalState", event.target.value)}>
-          {statesList.UF.map(state => {
-            return <option value={state.sigla}>{state.sigla}</option>
-          })}
-        </select>
-
-        <select onChange={event => handleFilterChange("retrievalCity", event.target.value,)}>
-          {
-            retrievalCitiesList
-              .map(city => {
-                return <option value={city}>{city}</option>
-              })
-          }
-        </select>
-      </div>
-
       <ul>
         {filteredShipmentsList.map(shipment => <li className='container mt-5 border' key={shipment.title}><ShipmentItem {...shipment} /></li>)}
       </ul>
