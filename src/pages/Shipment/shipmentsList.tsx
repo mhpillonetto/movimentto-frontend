@@ -8,6 +8,7 @@ import statesList from '../../data/states.json';
 import citiesList from '../../data/cities.json';
 import Constants from '../../data/constants'
 import RadioButtonGroup from '../../components/ui/radioButtonGroup'
+import RadioButton from '../../components/ui/radioButton'
 
 interface Filter extends Shipment {
   pricing: boolean
@@ -70,6 +71,10 @@ const Shipments = () => {
 
   //applies filter
   useEffect(() => {
+    console.log('====================================');
+    console.log(filter);
+    console.log('====================================');
+
     const filtered = shipmentsList
     setFilteredShipmentsList(filtered.filter((shipment) => {
       return (
@@ -124,7 +129,7 @@ const Shipments = () => {
         </div>
 
         <div>
-          <h3 className='mt-3'>Tipo de veículo</h3>
+          <h5 className='mt-3'>Tipo de veículo</h5>
           <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
             <RadioButtonGroup
               label="Leves"
@@ -161,71 +166,70 @@ const Shipments = () => {
         </div>
 
         <div>
-          <label htmlFor="trackingArea">Rastreador</label>
+          <h5>Rastreador</h5>
           <div>
-            <input
-              type="radio"
-              value="tracked"
-              onChange={e => handleFilterChange("tracking", e.target.value)}
+            <RadioButton
+              value={filter.tracking}
+              label="Sim"
               name="tracking"
+              id={"tracked"}
+              onChange={e => handleFilterChange("tracking", "tracked")}
+              checked={filter.tracking === "tracked"}
             />
-            <label htmlFor="trackingInput">Sim</label>
-
           </div>
 
-          <input
-            type="radio"
-            value="untracked"
-            onChange={e => handleFilterChange("tracking", e.target.value)}
-            name="tracking"
-          />
-          <label htmlFor="trackingInput">Não</label>
+          <div>
+            <RadioButton
+              value={filter.tracking}
+              label="Não"
+              name="tracking"
+              id={"untracked"}
+              onChange={e => handleFilterChange("tracking", "untracked")}
+              checked={filter.tracking === "untracked"}
+            />
+          </div>
         </div>
 
         <div className='mt-3'>
-          <label htmlFor="complementArea">Tipo de carga</label>
-          <div>
-            <input
-              type="radio"
-              value="Completa"
-              onChange={e => handleFilterChange("complement", e.target.value)}
-              name="complement"
-            />
-            <label htmlFor="complementInput">Completa</label>
-
-          </div>
-
-          <input
-            type="radio"
-            value="Complemento"
-            onChange={e => handleFilterChange("complement", e.target.value)}
+          <h5>Tipo de carga</h5>
+          <RadioButton
+            value={filter.complement}
+            label="Compĺeta"
             name="complement"
+            id={"complement"}
+            onChange={e => handleFilterChange("complement", "Completa")}
+            checked={filter.complement === "Completa"}
           />
-          <label htmlFor="complementInput">Complemento</label>
+
+          <RadioButton
+            value={filter.complement}
+            label="Compĺemento"
+            name="complement"
+            id={"complement"}
+            onChange={e => handleFilterChange("complement", "Complemento")}
+            checked={filter.complement === "Complemento"}
+          />
         </div>
 
         <div className='mt-3'>
-          <label htmlFor="pricingArea">Preço definido?</label>
-          <div>
-            <input
-              type="radio"
-              value="true"
-              onChange={e => handleFilterChange("pricing", true)}
-              name="pricing"
-            />
-            <label htmlFor="pricingInput">Sim</label>
-
-          </div>
-
-          <input
-            type="radio"
-            value="false"
-            onChange={e => handleFilterChange("pricing", false)}
+          <h5>Preço definido?</h5>
+          <RadioButton
+            value={filter.price}
+            label="Sim"
             name="pricing"
+            id={"pricing"}
+            onChange={e => handleFilterChange("pricing", true)}
+            checked={filter.pricing === true}
           />
-          <label htmlFor="pricingInput">Não</label>
 
-
+          <RadioButton
+            value={filter.price}
+            label="Não"
+            name="pricing"
+            id={"pricing"}
+            onChange={e => handleFilterChange("pricing", false)}
+            checked={filter.pricing === false}
+          />
         </div>
 
         <button type="reset" className="btn btn-primary mt-3 mb-5" onClick={() => setFilter(emptyFilter)}>

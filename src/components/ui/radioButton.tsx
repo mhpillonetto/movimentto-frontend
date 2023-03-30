@@ -14,7 +14,8 @@ const RadioButton = ({
     id='radio-button',
     onChange,
     name,
-    value
+    value,
+    checked
 }: InputElementProps) => {
     return (
         <Wrapper key={key}>
@@ -26,6 +27,7 @@ const RadioButton = ({
                     onChange={onChange}
                     name={name}
                     value={value}
+                    checked={checked}
                 />
                 <label htmlFor={id}>{label}</label>
             </div>
