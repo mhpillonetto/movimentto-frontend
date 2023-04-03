@@ -10,7 +10,8 @@ const Drivers = () => {
     const emptyDriversList = [] as Driver[]
     const emptyDriver = {} as Driver
 
-    const [driversList, setDriversList] = useState<AxiosResponse | null | void | Driver[]>(emptyDriversList)
+    const [driversList, setDriversList] = useState(emptyDriversList)
+    const [filteredDriversList, setFilteredDriversList] = useState(emptyDriversList)
     const [filter, setFilter] = useState(emptyDriver)
 
     useEffect(() => {
@@ -22,23 +23,31 @@ const Drivers = () => {
             )
     }, [])
 
-
-    useEffect(()=>{
+    //applies filter
+    useEffect(() => {
         console.log('====================================');
         console.log(filter);
         console.log('====================================');
-    },[filter])
+
+        const filtered = driversList
+        setFilteredDriversList(filtered ? filtered.filter((driver) => {
+            return (
+                (filter.city ? driver.city?.toUpperCase().match(filter.city.toUpperCase()) : true) &&
+                (filter.vehicleType ? driver.vehicleType === filter.vehicleType : true)
+            )
+        }) : [])
+    }, [filter])
 
     return (
         <div className='container mt-5'>
             <h1>Motoristas Disponíveis</h1>
             <Hidden label='Filtro' defaultHide={true} >
-                <DriversFilter filter={filter} setFilter={setFilter}/>
+                <DriversFilter filter={filter} setFilter={setFilter} />
             </Hidden>
             <ul>
                 {
-                    Array.isArray(driversList) ? 
-                    driversList.map(driver => <li className='container mt-5 border' key={driver.username}><DriverListItem {...driver} /></li>)
+                    Array.isArray(filteredDriversList) ?
+                        filteredDriversList.map(driver => <li className='container mt-5 border' key={driver.username}><DriverListItem {...driver} /></li>)
                         : null
                 }
             </ul>
