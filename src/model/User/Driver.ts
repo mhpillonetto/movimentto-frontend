@@ -11,4 +11,7 @@ export default interface Driver extends User {
     lastCheckIn: Date
     lat: number
     long: number
+    city: string
+    state: string
+    status: string
 }

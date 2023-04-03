@@ -8,7 +8,7 @@ import Constants from '../../data/constants'
 import RadioButtonGroup from '../../components/ui/radioButtonGroup'
 import RadioButton from '../../components/ui/radioButton'
 import TextInput from '../../components/input/TextInput'
-import ShipmentsFilter from '../../components/shipmentsFilter'
+import ShipmentsFilter from '../../components/ShipmentsFilter'
 import Hidden from '../../components/Hidden'
 
 interface Filter extends Shipment {

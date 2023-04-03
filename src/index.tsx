@@ -7,7 +7,7 @@ import {
 import Shipment from './components/ShipmentListItem';
 import './index.css';
 import Checkin from './pages/Checkin';
-import Drivers from './pages/Drivers';
+import Drivers from './pages/Drivers/driversList';
 import DriverDetails from './pages/Drivers/driverDetails';
 import Home from './pages/Home';
 import Landing from './pages/Landing';
