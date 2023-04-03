@@ -9,6 +9,7 @@ import citiesList from '../../data/cities.json';
 import Constants from '../../data/constants'
 import RadioButtonGroup from '../../components/ui/radioButtonGroup'
 import RadioButton from '../../components/ui/radioButton'
+import TextInput from '../../components/input/TextInput'
 
 interface Filter extends Shipment {
   pricing: boolean
@@ -78,8 +79,8 @@ const Shipments = () => {
     const filtered = shipmentsList
     setFilteredShipmentsList(filtered.filter((shipment) => {
       return (
-        (filter.deliveryCity ? shipment.deliveryCity === filter.deliveryCity : true) &&
-        (filter.deliveryCity ? shipment.deliveryCity === filter.deliveryCity : true) &&
+        (filter.deliveryCity ? shipment.deliveryCity?.toUpperCase().match(filter.deliveryCity.toUpperCase()) : true) &&
+        (filter.retrievalCity ? shipment.retrievalCity?.toUpperCase().match(filter.retrievalCity.toUpperCase()) : true) &&
         (filter.requiredVehicle ? shipment.requiredVehicle === filter.requiredVehicle : true) &&
         (filter.hasOwnProperty('tracking') ? (filter.tracking === 'tracked' ? shipment.tracking === 'tracked' : shipment.tracking != 'tracked') : true) &&
         (filter.hasOwnProperty('pricing') ? (filter.pricing ? shipment.hasOwnProperty('price') : !shipment.hasOwnProperty('price')) : true) &&
@@ -93,41 +94,19 @@ const Shipments = () => {
       <h1>Cargas disponíveis</h1>
       {/* Filtro */}
       <div>
-        <div>
-          <h5>Entrega</h5>
-          <select onChange={event => handleFilterChange("deliveryState", event.target.value)}>
-            {statesList.UF.map(state => {
-              return <option value={state.sigla}>{state.sigla}</option>
-            })}
-          </select>
-          <select onChange={event => handleFilterChange("deliveryCity", event.target.value,)}>
-            {
-              deliveryCitiesList
-                .map(city => {
-                  return <option value={city}>{city}</option>
-                })
-            }
-          </select>
-        </div>
+        <TextInput
+          value={filter.deliveryCity ? filter.deliveryCity : ''}
+          handleChange={event => handleFilterChange("deliveryCity", event.target.value)}
+          fieldName='deliveryCity'
+          label='Destino'
+        />
 
-        <div>
-          <h5>Retirada</h5>
-          <select onChange={event => handleFilterChange("retrievalState", event.target.value)}>
-            {statesList.UF.map(state => {
-              return <option value={state.sigla}>{state.sigla}</option>
-            })}
-          </select>
-
-          <select onChange={event => handleFilterChange("retrievalCity", event.target.value,)}>
-            {
-              retrievalCitiesList
-                .map(city => {
-                  return <option value={city}>{city}</option>
-                })
-            }
-          </select>
-        </div>
-
+        <TextInput
+          value={filter.retrievalCity ? filter.retrievalCity : ''}
+          handleChange={event => handleFilterChange("retrievalCity", event.target.value)}
+          fieldName='retrievalCity'
+          label='Origem'
+        />
         <div>
           <h5 className='mt-3'>Tipo de veículo</h5>
           <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
@@ -157,7 +136,6 @@ const Shipments = () => {
                 { name: "requiredVehicle", label: Constants.vehicleType.carretaLS, value: Constants.vehicleType.carretaLS, checked: filter.requiredVehicle === Constants.vehicleType.carretaLS },
                 { name: "requiredVehicle", label: Constants.vehicleType.rodotrem, value: Constants.vehicleType.rodotrem, checked: filter.requiredVehicle === Constants.vehicleType.rodotrem },
                 { name: "requiredVehicle", label: Constants.vehicleType.vanderleia, value: Constants.vehicleType.vanderleia, checked: filter.requiredVehicle === Constants.vehicleType.vanderleia }
-
               ]}
               onChange={event => handleFilterChange("requiredVehicle", event.target.value)}
             />
