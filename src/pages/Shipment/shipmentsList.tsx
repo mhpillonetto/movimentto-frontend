@@ -9,6 +9,7 @@ import RadioButtonGroup from '../../components/ui/radioButtonGroup'
 import RadioButton from '../../components/ui/radioButton'
 import TextInput from '../../components/input/TextInput'
 import ShipmentsFilter from '../../components/shipmentsFilter'
+import Hidden from '../../components/Hidden'
 
 interface Filter extends Shipment {
   pricing: boolean
@@ -52,7 +53,7 @@ const Shipments = () => {
       )
     }))
   }, [filter])
-  
+
   const navigate = useNavigate()
   useEffect(() => {
     if (!localStorage.userName) {
@@ -63,8 +64,10 @@ const Shipments = () => {
   return (
     <div className='container'>
       <h1>Cargas disponíveis</h1>
-      <h3>Filtrar</h3>
-      <ShipmentsFilter filter={filter} setFilter={setFilter} />
+      <Hidden label={"Filtros"} defaultHide={true}>
+        <h3>Filtros</h3>
+        <ShipmentsFilter filter={filter} setFilter={setFilter} />
+      </Hidden>
 
       <ul>
         {filteredShipmentsList.map(shipment => <li className='container mt-5 border' key={shipment.title}><ShipmentItem {...shipment} /></li>)}
