@@ -56,12 +56,10 @@ http.interceptors.response.use(
 
           return http(originalConfig);
         } catch (_error) {
-          logout();
           return Promise.reject(_error);
         }
       }
     }
-    logout();
     return Promise.reject(err);
   }
 );

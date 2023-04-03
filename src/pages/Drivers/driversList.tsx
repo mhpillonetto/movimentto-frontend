@@ -18,6 +18,7 @@ const Drivers = () => {
         getCheckedInDrivers()
             .then(res => {
                 setDriversList(res.data)
+                setFilteredDriversList(res.data)
             })
             .catch(error => console.log(error)
             )
@@ -25,10 +26,6 @@ const Drivers = () => {
 
     //applies filter
     useEffect(() => {
-        console.log('====================================');
-        console.log(filter);
-        console.log('====================================');
-
         const filtered = driversList
         setFilteredDriversList(filtered ? filtered.filter((driver) => {
             return (
