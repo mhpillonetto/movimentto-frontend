@@ -13,9 +13,12 @@ const Hidden = (props: HiddenProps) => {
     const [hidden, setHidden] = useState(defaultHide)
 
     return (
-        <div onClick={() => setHidden(!hidden)}>
+        <div >
+            <a onClick={() => setHidden(!hidden)}>
+                { hidden ? <a className="float-left">{`Ampliar ${label}`}</a> : <a className="float-left">{`Esconder ${label}`}</a>}
+            </a>
             {
-                !hidden ? children : <h3>{`Ampliar ${label}`}</h3>
+                !hidden ? children : null
             }
         </div>
     )

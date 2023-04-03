@@ -64,8 +64,7 @@ const Shipments = () => {
   return (
     <div className='container'>
       <h1>Cargas disponíveis</h1>
-      <Hidden label={"Filtros"} defaultHide={true}>
-        <h3>Filtros</h3>
+      <Hidden label={"Filtro"} defaultHide={true}>
         <ShipmentsFilter filter={filter} setFilter={setFilter} />
       </Hidden>
 
