@@ -3,7 +3,7 @@ import RadioButton from "./radioButton";
 
 const RadioButtonGroup = ({ label, options, onChange }: IOptionGroup) => {
     function renderOptions(){
-        return options.map(({label, value, name, disabled }: IOption, index) => {
+        return options.map(({label, value, name, disabled, checked }: IOption, index) => {
            const shortenedOptionLabel = label.replace(/\s+/g, "");
            const optionId = `radio-option-${shortenedOptionLabel}`;
            
@@ -17,6 +17,7 @@ const RadioButtonGroup = ({ label, options, onChange }: IOptionGroup) => {
                  disabled={disabled}
                  defaultChecked={index === 0}
                  onChange={onChange}
+                 checked={checked}
               />
            );
         });

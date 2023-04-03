@@ -3,6 +3,7 @@ export interface IOption {
     name?: string
     disabled?: boolean
     value: string
+    checked?: boolean
  }
  
  export interface IOptionGroup {

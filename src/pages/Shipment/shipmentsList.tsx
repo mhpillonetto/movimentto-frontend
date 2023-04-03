@@ -134,29 +134,29 @@ const Shipments = () => {
             <RadioButtonGroup
               label="Leves"
               options={[
-                { name: "requiredVehicle", label: Constants.vehicleType.tresQuartos, value: Constants.vehicleType.tresQuartos },
-                { name: "requiredVehicle", label: Constants.vehicleType.fiorino, value: Constants.vehicleType.fiorino },
-                { name: "requiredVehicle", label: Constants.vehicleType.toco, value: Constants.vehicleType.toco },
-                { name: "requiredVehicle", label: Constants.vehicleType.vlc, value: Constants.vehicleType.vlc }
+                { name: "requiredVehicle", label: Constants.vehicleType.tresQuartos, value: Constants.vehicleType.tresQuartos, checked: filter.requiredVehicle === Constants.vehicleType.tresQuartos },
+                { name: "requiredVehicle", label: Constants.vehicleType.fiorino, value: Constants.vehicleType.fiorino, checked: filter.requiredVehicle === Constants.vehicleType.fiorino },
+                { name: "requiredVehicle", label: Constants.vehicleType.toco, value: Constants.vehicleType.toco, checked: filter.requiredVehicle === Constants.vehicleType.toco },
+                { name: "requiredVehicle", label: Constants.vehicleType.vlc, value: Constants.vehicleType.vlc, checked: filter.requiredVehicle === Constants.vehicleType.vlc }
               ]}
               onChange={event => handleFilterChange("requiredVehicle", event.target.value)}
             />
             <RadioButtonGroup
               label="Médios"
               options={[
-                { name: "requiredVehicle", label: Constants.vehicleType.bitruck, value: Constants.vehicleType.bitruck },
-                { name: "requiredVehicle", label: Constants.vehicleType.truck, value: Constants.vehicleType.truck }
+                { name: "requiredVehicle", label: Constants.vehicleType.bitruck, value: Constants.vehicleType.bitruck, checked: filter.requiredVehicle === Constants.vehicleType.bitruck },
+                { name: "requiredVehicle", label: Constants.vehicleType.truck, value: Constants.vehicleType.truck, checked: filter.requiredVehicle === Constants.vehicleType.truck }
               ]}
               onChange={event => handleFilterChange("requiredVehicle", event.target.value)}
             />
             <RadioButtonGroup
               label="Pesados"
               options={[
-                { name: "requiredVehicle", label: Constants.vehicleType.bitrem, value: Constants.vehicleType.bitrem },
-                { name: "requiredVehicle", label: Constants.vehicleType.carreta, value: Constants.vehicleType.carreta },
-                { name: "requiredVehicle", label: Constants.vehicleType.carretaLS, value: Constants.vehicleType.carretaLS },
-                { name: "requiredVehicle", label: Constants.vehicleType.rodotrem, value: Constants.vehicleType.rodotrem },
-                { name: "requiredVehicle", label: Constants.vehicleType.vanderleia, value: Constants.vehicleType.vanderleia }
+                { name: "requiredVehicle", label: Constants.vehicleType.bitrem, value: Constants.vehicleType.bitrem, checked: filter.requiredVehicle === Constants.vehicleType.bitrem },
+                { name: "requiredVehicle", label: Constants.vehicleType.carreta, value: Constants.vehicleType.carreta, checked: filter.requiredVehicle === Constants.vehicleType.carreta },
+                { name: "requiredVehicle", label: Constants.vehicleType.carretaLS, value: Constants.vehicleType.carretaLS, checked: filter.requiredVehicle === Constants.vehicleType.carretaLS },
+                { name: "requiredVehicle", label: Constants.vehicleType.rodotrem, value: Constants.vehicleType.rodotrem, checked: filter.requiredVehicle === Constants.vehicleType.rodotrem },
+                { name: "requiredVehicle", label: Constants.vehicleType.vanderleia, value: Constants.vehicleType.vanderleia, checked: filter.requiredVehicle === Constants.vehicleType.vanderleia }
 
               ]}
               onChange={event => handleFilterChange("requiredVehicle", event.target.value)}
