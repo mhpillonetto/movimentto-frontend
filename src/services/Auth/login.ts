@@ -12,9 +12,9 @@ export const login = async (loggingUser: loginUser) => {
     const { username, password } = loggingUser
 
     try {
-        const { status, data } = await http_auth.post<loginResponse>(`/auth`, {
-            user: username,
-            pwd: password
+        const { status, data } = await http_auth.post<loginResponse>(`/auth/login`, {
+            username,
+            password
         })
 
         localStorage.setItem("accessToken", data.accessToken)

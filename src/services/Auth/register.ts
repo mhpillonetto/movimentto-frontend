@@ -3,12 +3,12 @@ import { http, http_auth } from '../../providers'
 import { login } from './login'
 
 
-export const createNewUser = async (newUser: User) => {
+export const register = async (newUser: User) => {
     const { username, password, email, userType, phoneNumber } = newUser
     try {
-        await http_auth.post(`register`, {
-            user: username,
-            pwd: password,
+        await http_auth.post(`auth/register`, {
+            username,
+            password,
             email,
             userType,
             phoneNumber

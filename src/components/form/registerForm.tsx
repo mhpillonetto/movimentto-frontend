@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Constants from '../../data/constants'
-import { createNewUser } from '../../services/Auth/createNewUser'
+import { register } from '../../services/Auth/register'
 import User from '../../model/User/User'
 import MvtSelect from '../select/select'
 import TextInput from '../input/TextInput'
@@ -49,7 +49,7 @@ const RegisterForm = () => {
     }
 
     try {
-      await createNewUser(newUser)
+      await register(newUser)
       navigate('/inicio', { replace: true })
 
     } catch (error) {
