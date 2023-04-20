@@ -3,13 +3,15 @@
 Este projeto contem o código fonte e documentação do frontend (cliente web) da plataforma Movimentto
 Último deploy de produção: [Node.js](https://nodejs.org/)
 
-Linguagem: [typescript](https://www.typescriptlang.org/)
+Linguagem: [TypeScript](https://www.typescriptlang.org/)
+
 Versão: 
 
 Framework: [ReactJS](https://legacy.reactjs.org/docs/getting-started.html)
+
 Versão: 
 
-[Node.js](https://nodejs.org/)
+
 - Type some Markdown on the left
 - See HTML in the right
 - ✨Magic ✨
